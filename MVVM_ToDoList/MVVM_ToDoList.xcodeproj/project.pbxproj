@@ -15,6 +15,7 @@
 		EC1A1ECD22AFE2A100E428F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC1A1ECB22AFE2A100E428F6 /* LaunchScreen.storyboard */; };
 		EC1A1ED822AFE2A100E428F6 /* MVVM_ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1ED722AFE2A100E428F6 /* MVVM_ToDoListTests.swift */; };
 		EC1A1EE322AFE2A100E428F6 /* MVVM_ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EE222AFE2A100E428F6 /* MVVM_ToDoListUITests.swift */; };
+		EC1A1EF622AFEADD00E428F6 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		EC1A1EDE22AFE2A100E428F6 /* MVVM_ToDoListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MVVM_ToDoListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC1A1EE222AFE2A100E428F6 /* MVVM_ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVM_ToDoListUITests.swift; sourceTree = "<group>"; };
 		EC1A1EE422AFE2A100E428F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		EC1A1EC122AFE2A000E428F6 /* MVVM_ToDoList */ = {
 			isa = PBXGroup;
 			children = (
+				EC1A1EF422AFEAC900E428F6 /* Models */,
 				EC1A1EC222AFE2A000E428F6 /* AppDelegate.swift */,
 				EC1A1EC422AFE2A000E428F6 /* ViewController.swift */,
 				EC1A1EC622AFE2A000E428F6 /* Main.storyboard */,
@@ -147,6 +150,14 @@
 				EC1A1EE422AFE2A100E428F6 /* Info.plist */,
 			);
 			path = MVVM_ToDoListUITests;
+			sourceTree = "<group>";
+		};
+		EC1A1EF422AFEAC900E428F6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,6 +387,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC1A1EF622AFEADD00E428F6 /* TaskModel.swift in Sources */,
 				EC1A1EC522AFE2A000E428F6 /* ViewController.swift in Sources */,
 				EC1A1EC322AFE2A000E428F6 /* AppDelegate.swift in Sources */,
 			);
