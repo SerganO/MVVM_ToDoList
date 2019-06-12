@@ -12,10 +12,25 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var services: Services!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let sceneCoordinator = SceneCoordinator(window: window!)
+        services = Services()
+        
+        let viewModel = SplashViewModel(services: services)
+        let scene = Scene.splash(viewModel)
+        let navigationModel = NavigationViewModel(services: services, root: scene)
+        let navigationScene = Scene.navigation(navigationModel)
+        
+
+        
+        window?.rootViewController = scene.viewController()
+        sceneCoordinator.transition(to: navigationScene, type: .root, animated: false)
+        window?.makeKeyAndVisible()
+        
         return true
     }
 
