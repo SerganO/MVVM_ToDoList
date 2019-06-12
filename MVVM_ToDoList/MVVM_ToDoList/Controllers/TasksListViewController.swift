@@ -11,7 +11,7 @@ import SnapKit
 
 class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDelegate, UITableViewDataSource {
     
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero,style: .grouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +23,10 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     
     override func configure() {
         super.configure()
-        
         tableView.register(TaskCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
     
     
     
@@ -43,11 +41,16 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if section == 0 {
+            return viewModel.uncompleatedTasks.count
+        } else {
+            return viewModel.compleatedTasks.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TaskCell
+        viewModel.configureTaskCell(cell, section: indexPath.section, row: indexPath.row)
         return cell
     }
     

@@ -25,10 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationModel = NavigationViewModel(services: services, root: scene)
         let navigationScene = Scene.navigation(navigationModel)
         
-
+        //let tableModel = Scene.tasksList(TasksListViewModel(services: services))
         
         window?.rootViewController = scene.viewController()
         sceneCoordinator.transition(to: navigationScene, type: .root, animated: false)
+        sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: services)), type: .push, animated: true)
         window?.makeKeyAndVisible()
         
         return true

@@ -10,4 +10,20 @@ import Foundation
 
 class TasksListViewModel: ViewModel {
     
+    let compleatedTasks: [TaskModel] = [TaskModel(), TaskModel(), TaskModel(), TaskModel()]
+    let uncompleatedTasks: [TaskModel] = [TaskModel(), TaskModel(), TaskModel()]
+    let taskViewModel = TaskViewModel(TaskModel())
+    
+    func configureTaskCell(_ cell: TaskCell, section: Int, row: Int) {
+        if section == 0 {
+            taskViewModel.configureTaskCell(uncompleatedTasks[row], cell: cell)
+        } else {
+            taskViewModel.configureTaskCell(compleatedTasks[row], cell: cell)
+        }
+    }
+    
+    func addTask() {
+        
+    }
+    
 }

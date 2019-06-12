@@ -54,4 +54,11 @@ extension TaskViewModel {
         cell.taskTextLabel.text = text
         cell.taskCompletedImageView.image = completeImage
     }
+    
+    public func configureTaskCell(_ task: TaskModel, cell: TaskCell) {
+        changeTask(task)
+        cell.taskTextLabel.text = text
+        cell.taskCompletedImageView.image = completeImage
+    }
+    
 }
