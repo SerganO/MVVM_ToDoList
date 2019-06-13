@@ -11,6 +11,8 @@ import SnapKit
 
 class TaskCell: UITableViewCell {
 
+    static let Identifier = "TaskCell"
+    
     let taskTextLabel = UILabel(frame: .zero)
     let taskCompletedImageView = UIImageView(frame: .zero)
     
@@ -38,6 +40,7 @@ class TaskCell: UITableViewCell {
             make.top.equalToSuperview().offset(5)
             make.bottom.equalToSuperview().offset(-5)
             make.leading.equalToSuperview().offset(5)
+            make.width.equalTo(taskCompletedImageView.snp.height)
         }
         
         container.addSubview(taskTextLabel)
@@ -45,7 +48,9 @@ class TaskCell: UITableViewCell {
         taskTextLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         taskTextLabel.textAlignment = .left
         taskTextLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(taskCompletedImageView)
+            //make.centerY.equalTo(taskCompletedImageView)
+            make.top.equalToSuperview().offset(5)
+            make.bottom.equalToSuperview().offset(-5)
             make.leading.equalTo(taskCompletedImageView.snp.trailing).offset(10)
             make.height.equalTo(taskTextLabel.font.lineHeight)
         }

@@ -9,5 +9,11 @@
 import Foundation
 
 class Services {
-
+    let sceneCoordinator: SceneCoordinator
+    let database: DatabaseService
+    
+    public init(sceneCoordinator: SceneCoordinator) {
+        self.sceneCoordinator = sceneCoordinator
+        database = FirebaseDatabaseService()
+    }
 }

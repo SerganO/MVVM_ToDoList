@@ -22,5 +22,18 @@ class SplashViewController: ViewController<SplashViewModel> {
         Label.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
         }
+        
+        let ai = UIActivityIndicatorView.init(style: .gray)
+        ai.startAnimating()
+        ai.center = view.center
+        ai.center.y = ai.center.y + 45
+        view.addSubview(ai)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.services.database.initUserRef("USER-1")
+        viewModel.services.database.initLocal()
+        viewModel.move()
     }
 }

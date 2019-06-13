@@ -10,7 +10,7 @@ import UIKit
 
 enum Scene {
     //case task
-    //case addTask
+    case addTask(AddTaskViewModel)
     //case editTask
     //case login
     case splash(SplashViewModel)
@@ -30,6 +30,9 @@ extension Scene: SceneType {
         
         case .tasksList(let viewModel):
             return TasksListViewController(viewModel: viewModel)
+            
+        case .addTask(let viewModel):
+            return AddTaskViewController(viewModel: viewModel)
             
         case .navigation (let viewModel):
             return NavigationController(viewModel: viewModel)

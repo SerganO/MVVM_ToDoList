@@ -12,4 +12,10 @@ class SplashViewModel: ViewModel {
     /*init(services: Services) {
         super.init(services: services)
     }*/
+    
+    func move() {
+        sleep(2)
+        
+        services.sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: services)), type: .push, animated: true)
+    }
 }

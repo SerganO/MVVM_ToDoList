@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,20 +18,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        FirebaseApp.configure()
+        IQKeyboardManager.shared.enable = true
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         let sceneCoordinator = SceneCoordinator(window: window!)
-        services = Services()
+        services = Services(sceneCoordinator: sceneCoordinator)
         
         let viewModel = SplashViewModel(services: services)
         let scene = Scene.splash(viewModel)
         let navigationModel = NavigationViewModel(services: services, root: scene)
         let navigationScene = Scene.navigation(navigationModel)
         
-        //let tableModel = Scene.tasksList(TasksListViewModel(services: services))
-        
         window?.rootViewController = scene.viewController()
         sceneCoordinator.transition(to: navigationScene, type: .root, animated: false)
-        sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: services)), type: .push, animated: true)
         window?.makeKeyAndVisible()
         
         return true

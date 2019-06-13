@@ -22,10 +22,6 @@ class SceneCoordinator: SceneCoordinatorType {
     var currentViewController: UIViewController {
         var current = window.rootViewController
         
-        if let tabbarController = current as? UITabBarController {
-            current = tabbarController.selectedViewController
-        }
-        
         if let navigationController = current as? UINavigationController {
             current = navigationController.topViewController
         }
@@ -38,16 +34,14 @@ class SceneCoordinator: SceneCoordinatorType {
     }
     
     static func actualViewController(for viewController: UIViewController) -> UIViewController {
-        if let tabbarController = viewController as? UITabBarController {
-            return actualViewController(for: tabbarController.selectedViewController!)
-        }
-        else if let navigationController = viewController as? UINavigationController {
+        if let navigationController = viewController as? UINavigationController {
             return navigationController.viewControllers.first!
         } else {
             return viewController
         }
     }
     
+    @discardableResult
     func pop(animated: Bool) -> Completable {
         let subject = PublishSubject<Void>()
         if currentViewController.presentingViewController != nil  {
