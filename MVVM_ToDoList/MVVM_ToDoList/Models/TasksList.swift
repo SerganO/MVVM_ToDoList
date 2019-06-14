@@ -10,6 +10,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxDataSources
+typealias Section = SectionModel<String, TaskModel>
+
 
 class TasksList {
     static let shared = TasksList()
@@ -20,11 +22,16 @@ class TasksList {
     
     var items: Observable<[SectionModel<String,TaskModel>]>
     
+    //let sect = Variable<SectionModel<String,TaskModel>([])
+    
+    let sect = Variable<[Section]>([])
+    
     init() {
         items = Observable.just(sections)
     }
     
-    func update() {
+    func update(_ task: TaskModel) {
+        sections[0].items.append(task)
         items = Observable.just(sections)
     }
     

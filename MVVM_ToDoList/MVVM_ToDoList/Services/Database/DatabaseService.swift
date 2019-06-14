@@ -12,6 +12,6 @@ protocol DatabaseService {
     func initLocal()
     func initUserRef(_ pathString: String)
     func addTask(_ task:TaskModel)
-    func editTask(_ task: TaskModel, editItem:[String: Any])
+    func editTask(_ task: TaskModel, editItems:[[String: Any]])
     func deleteTask( _ task: TaskModel)
 }

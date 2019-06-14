@@ -167,18 +167,12 @@
 		EC1A1EC122AFE2A000E428F6 /* MVVM_ToDoList */ = {
 			isa = PBXGroup;
 			children = (
-				ECB16CC022B11A4F00A9D12A /* Controllers */,
-				ECB16CB322B111FA00A9D12A /* Services */,
-				ECB16CAE22B10EDE00A9D12A /* Scenes */,
-				EC1A1EF422AFEAC900E428F6 /* Models */,
-				ECB16CAA22B105EF00A9D12A /* View */,
-				ECB16CA522B0FEFC00A9D12A /* ViewModels */,
-				EC1A1EC222AFE2A000E428F6 /* AppDelegate.swift */,
-				EC1A1EC622AFE2A000E428F6 /* Main.storyboard */,
-				EC1A1EC922AFE2A100E428F6 /* Assets.xcassets */,
-				EC1A1ECB22AFE2A100E428F6 /* LaunchScreen.storyboard */,
 				EC1A1ECE22AFE2A100E428F6 /* Info.plist */,
 				ECB0E22522B24E510002B3B4 /* GoogleService-Info.plist */,
+				EC1A1EF422AFEAC900E428F6 /* Models */,
+				EC7889F222B3D86A000D8019 /* UI */,
+				ECB16CB322B111FA00A9D12A /* Services */,
+				EC7889F322B3D897000D8019 /* Resources */,
 			);
 			path = MVVM_ToDoList;
 			sourceTree = "<group>";
@@ -209,6 +203,28 @@
 				EC7889ED22B39CC6000D8019 /* CustomSection.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EC7889F222B3D86A000D8019 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				ECB16CC022B11A4F00A9D12A /* Controllers */,
+				EC1A1EC222AFE2A000E428F6 /* AppDelegate.swift */,
+				ECB16CAE22B10EDE00A9D12A /* Scenes */,
+				ECB16CA522B0FEFC00A9D12A /* ViewModels */,
+				ECB16CAA22B105EF00A9D12A /* View */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		EC7889F322B3D897000D8019 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EC1A1EC922AFE2A100E428F6 /* Assets.xcassets */,
+				EC1A1EC622AFE2A000E428F6 /* Main.storyboard */,
+				EC1A1ECB22AFE2A100E428F6 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		ECB0E22922B24F120002B3B4 /* Database */ = {

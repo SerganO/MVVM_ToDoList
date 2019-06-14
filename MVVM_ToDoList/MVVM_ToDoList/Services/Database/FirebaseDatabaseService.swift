@@ -12,13 +12,16 @@ import Firebase
 class FirebaseDatabaseService: DatabaseService {
     func initLocal() {
         UserRef.child("tasks").queryOrdered(byChild: "createDate").observe(.value) { (snapshot) in
-            let emptyValue:[TaskModel] = []
-            TasksList.shared.uncompletedTasks.accept(emptyValue)
+            TasksList.shared.sect.value[0].items.removeAll()
+            TasksList.shared.sect.value[1].items.removeAll()
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot,
                     let task = TaskModel(snapshot: snapshot) {
-                    let newValue = [task] + TasksList.shared.uncompletedTasks.value
-                    TasksList.shared.uncompletedTasks.accept(newValue)
+                    if task.completed {
+                        TasksList.shared.sect.value[1].items.insert(task, at: 0)
+                    } else {
+                        TasksList.shared.sect.value[0].items.insert(task, at: 0)
+                    }
                 }
             }
         }
@@ -31,10 +34,14 @@ class FirebaseDatabaseService: DatabaseService {
     
     let MainRef = Database.database().reference()
     var UserRef = Database.database().reference(withPath: "users")
-    public func editTask(_ task: TaskModel, editItem:[String: Any]) {
+    
+    public func editTask(_ task: TaskModel, editItems:[[String: Any]]) {
         let que = DispatchQueue.global()
         que.async {
-            self.UserRef.child("tasks").child(task.uuid!.uuidString).updateChildValues(editItem)
+            
+            for editItem in editItems {
+                self.UserRef.child("tasks").child(task.uuid!.uuidString).updateChildValues(editItem)
+            }
         }
     }
     public func deleteTask(_ task: TaskModel) {

@@ -22,6 +22,8 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
         textView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        navigationItem.title = "Add"
+        
         
         let button = UIButton()
         button.setTitle("Done", for: .normal)
@@ -34,7 +36,12 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
         doneButton = UIBarButtonItem.init(customView: button)
         navigationItem.rightBarButtonItem = doneButton
         
-        textView.resignFirstResponder()
+        if let editItem = viewModel.taskForEdit {
+            textView.text = editItem.text
+            navigationItem.title = "Edit"
+        }
+        
+        textView.becomeFirstResponder()
         textView.font = UIFont.preferredFont(forTextStyle: .subheadline)
         
     }

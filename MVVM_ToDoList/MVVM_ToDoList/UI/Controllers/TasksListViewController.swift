@@ -12,9 +12,18 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+enum Api {
+    /// Network response
+    static func call() -> Observable<[TaskModel]> {
+        return .just([TaskModel()])
+    }
+}
+
+
 class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDelegate, UITableViewDataSource {
     
-    let tableView = UITableView(frame: .zero,style: .grouped)
+    
+    let tableView = UITableView(frame: .zero, style: .grouped)
     var addButton = UIBarButtonItem()
     
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, TaskModel>>(configureCell: { dataSource, tableView, indexPath, item in
@@ -35,6 +44,7 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         button.setTitleColor(.black, for: .normal)
         button.rx.tap.bind {
             self.viewModel.addTask()
+            self.tableView.reloadData()
         }.disposed(by: viewModel.disposeBag)
         addButton = UIBarButtonItem.init(customView: button)
         navigationItem.rightBarButtonItem = addButton
@@ -43,9 +53,25 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             return dataSource.sectionModels[index].model
         }
         
-        TasksList.shared.items
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: viewModel.disposeBag)
+//        TasksList.shared.items
+//            .bind(to: tableView.rx.items(dataSource: dataSource))
+//            .disposed(by: viewModel.disposeBag)
+        
+        Api.call().map { (customDatas) -> [Section] in
+            [Section(model: "Uncompleted", items: []),
+             Section(model: "Completed", items: [])]
+            }.bind(to: TasksList.shared.sect).disposed(by: viewModel.disposeBag)
+        
+        TasksList.shared.sect.asDriver().drive(
+                tableView.rx.items(dataSource: dataSource)
+            ).disposed(by: viewModel.disposeBag)
+        
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
     }
     
@@ -53,7 +79,10 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         super.configure()
         tableView.register(TaskCell.self, forCellReuseIdentifier: TaskCell.Identifier)
         //tableView.dataSource = self
-        //tableView.delegate = self
+        tableView.delegate = self
+//        tableView.isEditing = false
+//        self.setEditing(false, animated: true)
+        //tableView.rx.setDelegate(self)
         
         configureReactiveTableView()
         
@@ -73,6 +102,7 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             }         }).disposed(by: disposeBag)
         
         
+
         
         //TasksList.shared.uncompletedTasks.bind(to: tableView.dataSource)
         /*TasksList.shared.dataSource
@@ -99,7 +129,7 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return TasksList.shared.uncompletedTasks.value.count
@@ -107,12 +137,49 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             return TasksList.shared.completedTasks.value.count
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.Identifier, for: indexPath) as! TaskCell
-        viewModel.configureTaskCell(cell, section: indexPath.section, row: indexPath.row)
+        viewModel.configureTaskCell(cell, indexPath: indexPath)
         return cell
     }
     
+    // MARK: - UITableViewDelegate
+    
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?  {
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
+            
+            let task = TasksList.shared.sect.value[indexPath.section].items[indexPath.row]
+            self.viewModel.editTask(task)
+            
+        })
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath:IndexPath) -> Void in
+            if indexPath.section == 0 {
+                
+            } else {
+                
+            }
+            let indexPaths = [indexPath]
+            tableView.deleteRows(at: indexPaths, with: .automatic)
+        })
+        
+        return [deleteAction,editAction]
+    }
+    
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        return UITableViewCell.EditingStyle.none
+//    }
+//    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+//        return false
+//    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
     
 }

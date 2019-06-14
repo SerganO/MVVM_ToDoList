@@ -7,8 +7,13 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+import RxDataSources
 
 class AddTaskViewModel: ViewModel {
+    
+    var taskForEdit: TaskModel?
     
     func createTask(_ text: String) -> TaskModel {
         
@@ -22,16 +27,17 @@ class AddTaskViewModel: ViewModel {
     }
     
     func addTask(_ task: TaskModel) {
-        
-        //services.database.addTask(task)
-        //TasksList.shared.sections[0].items.append(task)
-        //TasksList.shared.items
-        
-        let newValue = [task] + TasksList.shared.uncompletedTasks.value
-        TasksList.shared.uncompletedTasks.accept(newValue)
-        //TasksList.shared.uncompletedTasks.value.append(task)
-        
-        
+        services.database.addTask(task)
+        TasksList.shared.sect.value[0].items.append(task)
+    }
+    
+    override init(services: Services) {
+        super.init(services: services)
+    }
+    
+    init(services: Services, taskForEdit: TaskModel) {
+        super.init(services: services)
+        self.taskForEdit = taskForEdit
     }
     
 }
