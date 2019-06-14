@@ -17,11 +17,7 @@ class TasksListViewModel: ViewModel {
     let Tasks = Observable.just(TaskModel())
     
     func configureTaskCell(_ cell: TaskCell, section: Int, row: Int) {
-        if section == 0 {
-            taskViewModel.configureTaskCell(TasksList.shared.uncompletedTasks.value[row], cell: cell)
-        } else {
-            taskViewModel.configureTaskCell(TasksList.shared.completedTasks.value[row], cell: cell)
-        }
+        taskViewModel.configureTaskCell(TasksList.shared.sections[section].items[row], cell: cell)
     }
     
     func addTask() {
@@ -30,7 +26,7 @@ class TasksListViewModel: ViewModel {
     }
     
     func selectCell(_ cell: TaskCell, indexPath: IndexPath) {
-        let task = indexPath.section == 0 ? TasksList.shared.uncompletedTasks.value[indexPath.row] : TasksList.shared.completedTasks.value[indexPath.row]
+        let task =  TasksList.shared.sections[indexPath.section].items[indexPath.row]
         task.completed = !task.completed
         taskViewModel.changeTask(task)
         configureTaskCell(cell, section: indexPath.section, row: indexPath.row)

@@ -6,6 +6,7 @@ target 'MVVM_ToDoList' do
   pod 'SnapKit'
   pod 'RxSwift', '~> 4.5'
   pod 'RxCocoa', '~> 4.5'
+  pod 'RxDataSources', '~> 3.0'
   pod 'Firebase/Core', :inhibit_warnings => true
   pod 'Firebase/Database', :inhibit_warnings => true
   pod 'Firebase/Auth', :inhibit_warnings => true

@@ -10,27 +10,19 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDelegate, UITableViewDataSource {
     
     let tableView = UITableView(frame: .zero,style: .grouped)
     var addButton = UIBarButtonItem()
     
-    /*let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Double>>(
-     configureCell: { (_, tv, indexPath, element) in
-     let cell = tv.dequeueReusableCell(withIdentifier: "Cell")!
-     cell.textLabel?.text = "\(element) @ row \(indexPath.row)"
-     return cell
-     },
-     titleForHeaderInSection: { dataSource, sectionIndex in
-     return dataSource[sectionIndex].model
-     }
-     )*/
-    
-    //let dataSources = SectionedViewDataSourceType<SectionModel<String,Double//
-    
-    //let dataSource = RxTableView
-    
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, TaskModel>>(configureCell: { dataSource, tableView, indexPath, item in
+                    let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.Identifier, for: indexPath) as! TaskCell
+                    cell.taskTextLabel.text = item.text
+                    cell.taskCompletedImageView.image = item.completed ? #imageLiteral(resourceName: "Complete") : #imageLiteral(resourceName: "Uncomplete")
+                    return cell
+    })
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +39,14 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         addButton = UIBarButtonItem.init(customView: button)
         navigationItem.rightBarButtonItem = addButton
         navigationItem.hidesBackButton = true
+        dataSource.titleForHeaderInSection = { dataSource, index in
+            return dataSource.sectionModels[index].model
+        }
+        
+        TasksList.shared.items
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: viewModel.disposeBag)
+        
     }
     
     override func configure() {
@@ -75,13 +75,15 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         
         
         //TasksList.shared.uncompletedTasks.bind(to: tableView.dataSource)
-        TasksList.shared.dataSource
+        /*TasksList.shared.dataSource
             .bind(to: tableView.rx.items(cellIdentifier: TaskCell.Identifier, cellType: TaskCell.self)) {  row, element, cell in
                 //cell.textLabel?.text = "\(element.text) \(row)"
                 self.viewModel.taskViewModel.changeTask(element)
                 self.viewModel.configureTaskCell(cell, section: 0, row: row)
                 
-            }.disposed(by: disposeBag)
+            }.disposed(by: disposeBag)*/
+        
+        
         
         
         

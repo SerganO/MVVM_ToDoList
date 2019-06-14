@@ -5,6 +5,7 @@ PODS:
   - Bolts/AppLinks (1.9.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.9.0)
+  - Differentiator (3.1.0)
   - FacebookCore (0.5.0):
     - Bolts (~> 1.9)
     - FBSDKCoreKit (~> 4.37)
@@ -101,6 +102,10 @@ PODS:
   - nanopb/encode (0.3.901)
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxDataSources (3.1.0):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
   - RxSwift (4.5.0)
   - SnapKit (5.0.0)
 
@@ -115,12 +120,14 @@ DEPENDENCIES:
   - GoogleSignIn
   - IQKeyboardManagerSwift
   - RxCocoa (~> 4.5)
+  - RxDataSources (~> 3.0)
   - RxSwift (~> 4.5)
   - SnapKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Bolts
+    - Differentiator
     - FacebookCore
     - FacebookLogin
     - FBSDKCoreKit
@@ -141,11 +148,13 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - RxCocoa
+    - RxDataSources
     - RxSwift
     - SnapKit
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
   FacebookLogin: ebcf34714a1cb9f0759d9f071cfb01ed500996cf
   FBSDKCoreKit: aa42f1c384775f8b075f53a43080474278e9701d
@@ -166,9 +175,10 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
 
-PODFILE CHECKSUM: e37db17dfba3df3c3ce73063cd92e3e6f8f32d00
+PODFILE CHECKSUM: 93148f7f7ae275d1f43aa076ba3c32cbc15b98bb
 
 COCOAPODS: 1.6.1
