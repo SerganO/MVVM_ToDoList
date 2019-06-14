@@ -12,12 +12,13 @@ import RxCocoa
 
 class TasksListViewModel: ViewModel {
     
-    let taskViewModel = TaskViewModel(TaskModel())
+    static func configureTaskCell(_ task:TaskModel, cell: TaskCell) {
+        cell.taskTextLabel.text = task.text
+        cell.taskCompletedImageView.image = task.completed ? #imageLiteral(resourceName: "Complete") : #imageLiteral(resourceName: "Uncomplete")
+    }
     
-    //let Tasks = Observable.just(TaskModel())
-    
-    func configureTaskCell(_ cell: TaskCell, indexPath: IndexPath) {
-        taskViewModel.configureTaskCell(TasksList.shared.sect.value[indexPath.section].items[indexPath.row], cell: cell)
+    static func initDataSource() -> Observable<[TaskModel]> {
+        return .just([])
     }
     
     func addTask() {
@@ -31,18 +32,18 @@ class TasksListViewModel: ViewModel {
     }
     
     func selectCell(_ cell: TaskCell, indexPath: IndexPath) {
-        let task =   TasksList.shared.sect.value[indexPath.section].items[indexPath.row]
+        let task = TasksList.shared.sect.value[indexPath.section].items[indexPath.row]
         task.completed = !task.completed
-        taskViewModel.changeTask(task)
-        configureTaskCell(cell, indexPath: indexPath)
+        TasksListViewModel.configureTaskCell(task, cell: cell)
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .medium
         formatter.dateFormat = "dd-MM-yyyy HH-mm-ss"
         services.database.editTask(task, editItems: [["completed":task.completed ? 1 : 0],["createDate":formatter.string(from: Date())]])
-        //services.database.editTask(task, editItems: )
-        
     }
+    
+    
+    
     
     
 }

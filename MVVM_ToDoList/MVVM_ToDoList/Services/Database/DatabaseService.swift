@@ -9,8 +9,8 @@
 import Foundation
 
 protocol DatabaseService {
-    func initLocal()
-    func initUserRef(_ pathString: String)
+    func syncLocal()
+    func setUserRef(_ pathString: String)
     func addTask(_ task:TaskModel)
     func editTask(_ task: TaskModel, editItems:[[String: Any]])
     func deleteTask( _ task: TaskModel)

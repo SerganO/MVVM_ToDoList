@@ -32,8 +32,8 @@ class SplashViewController: ViewController<SplashViewModel> {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.services.database.initUserRef("USER-1")
-        viewModel.services.database.initLocal()
+        viewModel.services.database.setUserRef("USER-1")
+        viewModel.services.database.syncLocal()
         viewModel.move()
     }
 }

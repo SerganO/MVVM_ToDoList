@@ -16,7 +16,6 @@
 		EC1A1ED822AFE2A100E428F6 /* MVVM_ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1ED722AFE2A100E428F6 /* MVVM_ToDoListTests.swift */; };
 		EC1A1EE322AFE2A100E428F6 /* MVVM_ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EE222AFE2A100E428F6 /* MVVM_ToDoListUITests.swift */; };
 		EC1A1EF622AFEADD00E428F6 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */; };
-		EC7889EE22B39CC6000D8019 /* CustomSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7889ED22B39CC6000D8019 /* CustomSection.swift */; };
 		ECB0E22622B24E510002B3B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECB0E22522B24E510002B3B4 /* GoogleService-Info.plist */; };
 		ECB0E22822B24F0C0002B3B4 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0E22722B24F0C0002B3B4 /* DatabaseService.swift */; };
 		ECB0E22B22B2500B0002B3B4 /* FirebaseDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0E22A22B2500B0002B3B4 /* FirebaseDatabaseService.swift */; };
@@ -24,7 +23,6 @@
 		ECB0E23022B268760002B3B4 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0E22F22B268760002B3B4 /* AddTaskViewController.swift */; };
 		ECB0E23422B27AA30002B3B4 /* TasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0E23322B27AA30002B3B4 /* TasksList.swift */; };
 		ECB16CA422B0FEF800A9D12A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CA322B0FEF800A9D12A /* ViewModel.swift */; };
-		ECB16CA722B1043400A9D12A /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CA622B1043400A9D12A /* TaskViewModel.swift */; };
 		ECB16CA922B105E400A9D12A /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CA822B105E400A9D12A /* TaskCell.swift */; };
 		ECB16CAD22B10DDA00A9D12A /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CAC22B10DDA00A9D12A /* NavigationViewModel.swift */; };
 		ECB16CB022B10F3800A9D12A /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CAF22B10F3800A9D12A /* Scene.swift */; };
@@ -75,7 +73,6 @@
 		EC1A1EE222AFE2A100E428F6 /* MVVM_ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVM_ToDoListUITests.swift; sourceTree = "<group>"; };
 		EC1A1EE422AFE2A100E428F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
-		EC7889ED22B39CC6000D8019 /* CustomSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSection.swift; sourceTree = "<group>"; };
 		ECB0E22522B24E510002B3B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECB0E22722B24F0C0002B3B4 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		ECB0E22A22B2500B0002B3B4 /* FirebaseDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseService.swift; sourceTree = "<group>"; };
@@ -83,7 +80,6 @@
 		ECB0E22F22B268760002B3B4 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		ECB0E23322B27AA30002B3B4 /* TasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksList.swift; sourceTree = "<group>"; };
 		ECB16CA322B0FEF800A9D12A /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		ECB16CA622B1043400A9D12A /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		ECB16CA822B105E400A9D12A /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		ECB16CAC22B10DDA00A9D12A /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
 		ECB16CAF22B10F3800A9D12A /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
@@ -200,7 +196,6 @@
 			children = (
 				EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */,
 				ECB0E23322B27AA30002B3B4 /* TasksList.swift */,
-				EC7889ED22B39CC6000D8019 /* CustomSection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,11 +203,10 @@
 		EC7889F222B3D86A000D8019 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				ECB16CC022B11A4F00A9D12A /* Controllers */,
 				EC1A1EC222AFE2A000E428F6 /* AppDelegate.swift */,
 				ECB16CAE22B10EDE00A9D12A /* Scenes */,
-				ECB16CA522B0FEFC00A9D12A /* ViewModels */,
-				ECB16CAA22B105EF00A9D12A /* View */,
+				EC7889F522B3DA0C000D8019 /* Screens */,
+				EC7889F422B3D9EC000D8019 /* Views */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -227,6 +221,71 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		EC7889F422B3D9EC000D8019 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ECB16CA822B105E400A9D12A /* TaskCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EC7889F522B3DA0C000D8019 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				EC7889F822B3DA3C000D8019 /* ViewController */,
+				EC7889F622B3DA19000D8019 /* Navigation */,
+				EC7889F722B3DA2D000D8019 /* Splash */,
+				EC7889F922B3DA66000D8019 /* TasksList */,
+				EC7889FA22B3DA74000D8019 /* AddTask */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		EC7889F622B3DA19000D8019 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				ECB16CCA22B1284F00A9D12A /* NavigationController.swift */,
+				ECB16CAC22B10DDA00A9D12A /* NavigationViewModel.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		EC7889F722B3DA2D000D8019 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				ECB16CC522B1210B00A9D12A /* SplashViewController.swift */,
+				ECB16CC322B120E700A9D12A /* SplashViewModel.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		EC7889F822B3DA3C000D8019 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EC1A1EC422AFE2A000E428F6 /* ViewController.swift */,
+				ECB16CA322B0FEF800A9D12A /* ViewModel.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		EC7889F922B3DA66000D8019 /* TasksList */ = {
+			isa = PBXGroup;
+			children = (
+				ECB16CC122B11B5700A9D12A /* TasksListViewController.swift */,
+				ECB16CB122B110E900A9D12A /* TasksListViewModel.swift */,
+			);
+			path = TasksList;
+			sourceTree = "<group>";
+		};
+		EC7889FA22B3DA74000D8019 /* AddTask */ = {
+			isa = PBXGroup;
+			children = (
+				ECB0E22F22B268760002B3B4 /* AddTaskViewController.swift */,
+				ECB0E22D22B268310002B3B4 /* AddTaskViewModel.swift */,
+			);
+			path = AddTask;
+			sourceTree = "<group>";
+		};
 		ECB0E22922B24F120002B3B4 /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,27 +293,6 @@
 				ECB0E22A22B2500B0002B3B4 /* FirebaseDatabaseService.swift */,
 			);
 			path = Database;
-			sourceTree = "<group>";
-		};
-		ECB16CA522B0FEFC00A9D12A /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				ECB16CA322B0FEF800A9D12A /* ViewModel.swift */,
-				ECB16CC322B120E700A9D12A /* SplashViewModel.swift */,
-				ECB16CA622B1043400A9D12A /* TaskViewModel.swift */,
-				ECB16CAC22B10DDA00A9D12A /* NavigationViewModel.swift */,
-				ECB16CB122B110E900A9D12A /* TasksListViewModel.swift */,
-				ECB0E22D22B268310002B3B4 /* AddTaskViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		ECB16CAA22B105EF00A9D12A /* View */ = {
-			isa = PBXGroup;
-			children = (
-				ECB16CA822B105E400A9D12A /* TaskCell.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		ECB16CAE22B10EDE00A9D12A /* Scenes */ = {
@@ -269,23 +307,11 @@
 		ECB16CB322B111FA00A9D12A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				ECB0E22922B24F120002B3B4 /* Database */,
-				ECB16CC722B1253200A9D12A /* Scenes */,
 				ECB16CB422B1122500A9D12A /* Services.swift */,
+				ECB16CC722B1253200A9D12A /* Scenes */,
+				ECB0E22922B24F120002B3B4 /* Database */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		ECB16CC022B11A4F00A9D12A /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				EC1A1EC422AFE2A000E428F6 /* ViewController.swift */,
-				ECB16CCA22B1284F00A9D12A /* NavigationController.swift */,
-				ECB16CC522B1210B00A9D12A /* SplashViewController.swift */,
-				ECB16CC122B11B5700A9D12A /* TasksListViewController.swift */,
-				ECB0E22F22B268760002B3B4 /* AddTaskViewController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		ECB16CC722B1253200A9D12A /* Scenes */ = {
@@ -548,13 +574,11 @@
 				ECB0E22B22B2500B0002B3B4 /* FirebaseDatabaseService.swift in Sources */,
 				ECB16CCB22B1284F00A9D12A /* NavigationController.swift in Sources */,
 				ECB16CB022B10F3800A9D12A /* Scene.swift in Sources */,
-				ECB16CA722B1043400A9D12A /* TaskViewModel.swift in Sources */,
 				ECB0E23022B268760002B3B4 /* AddTaskViewController.swift in Sources */,
 				ECB16CB522B1122500A9D12A /* Services.swift in Sources */,
 				ECB16CA922B105E400A9D12A /* TaskCell.swift in Sources */,
 				EC1A1EC322AFE2A000E428F6 /* AppDelegate.swift in Sources */,
 				ECB0E22822B24F0C0002B3B4 /* DatabaseService.swift in Sources */,
-				EC7889EE22B39CC6000D8019 /* CustomSection.swift in Sources */,
 				ECB0E23422B27AA30002B3B4 /* TasksList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

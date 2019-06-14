@@ -10,7 +10,11 @@ import Foundation
 import Firebase
 
 class FirebaseDatabaseService: DatabaseService {
-    func initLocal() {
+    
+    let MainRef = Database.database().reference()
+    var UserRef = Database.database().reference(withPath: "users")
+    
+    func syncLocal() {
         UserRef.child("tasks").queryOrdered(byChild: "createDate").observe(.value) { (snapshot) in
             TasksList.shared.sect.value[0].items.removeAll()
             TasksList.shared.sect.value[1].items.removeAll()
@@ -27,13 +31,18 @@ class FirebaseDatabaseService: DatabaseService {
         }
     }
     
-    
-    func initUserRef(_ pathString: String) {
+    func setUserRef(_ pathString: String) {
         UserRef = MainRef.child("users").child(pathString)
     }
     
-    let MainRef = Database.database().reference()
-    var UserRef = Database.database().reference(withPath: "users")
+    public func addTask(_ task: TaskModel)
+    {
+        let que = DispatchQueue.global()
+        que.async {
+            let taskRef = self.UserRef.child("tasks").child(task.uuid!.uuidString)
+            taskRef.setValue(task.toDic())
+        }
+    }
     
     public func editTask(_ task: TaskModel, editItems:[[String: Any]]) {
         let que = DispatchQueue.global()
@@ -44,24 +53,12 @@ class FirebaseDatabaseService: DatabaseService {
             }
         }
     }
+    
     public func deleteTask(_ task: TaskModel) {
         let que = DispatchQueue.global()
         que.async {
             self.UserRef.child("tasks").child(task.uuid!.uuidString).removeValue()
         }
     }
-    
-    public func addTask(_ task: TaskModel)
-    {
-        let que = DispatchQueue.global()
-        que.async {
-            let taskRef = self.UserRef.child("tasks").child(task.uuid!.uuidString)
-            taskRef.setValue(task.toDic())
-        }
-        
-        
-        
-    }
-    
     
 }

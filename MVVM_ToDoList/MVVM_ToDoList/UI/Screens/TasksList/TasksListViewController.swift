@@ -12,33 +12,27 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
-enum Api {
-    /// Network response
-    static func call() -> Observable<[TaskModel]> {
-        return .just([TaskModel()])
-    }
-}
+
 
 
 class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDelegate, UITableViewDataSource {
     
-    
     let tableView = UITableView(frame: .zero, style: .grouped)
     var addButton = UIBarButtonItem()
-    
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, TaskModel>>(configureCell: { dataSource, tableView, indexPath, item in
                     let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.Identifier, for: indexPath) as! TaskCell
-                    cell.taskTextLabel.text = item.text
-                    cell.taskCompletedImageView.image = item.completed ? #imageLiteral(resourceName: "Complete") : #imageLiteral(resourceName: "Uncomplete")
+                    TasksListViewModel.configureTaskCell(item, cell: cell)
                     return cell
     })
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
         let button = UIButton()
         button.setTitle("ADD", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -49,15 +43,12 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         addButton = UIBarButtonItem.init(customView: button)
         navigationItem.rightBarButtonItem = addButton
         navigationItem.hidesBackButton = true
+        
         dataSource.titleForHeaderInSection = { dataSource, index in
             return dataSource.sectionModels[index].model
         }
         
-//        TasksList.shared.items
-//            .bind(to: tableView.rx.items(dataSource: dataSource))
-//            .disposed(by: viewModel.disposeBag)
-        
-        Api.call().map { (customDatas) -> [Section] in
+        TasksListViewModel.initDataSource().map { (customDatas) -> [Section] in
             [Section(model: "Uncompleted", items: []),
              Section(model: "Completed", items: [])]
             }.bind(to: TasksList.shared.sect).disposed(by: viewModel.disposeBag)
@@ -65,9 +56,6 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         TasksList.shared.sect.asDriver().drive(
                 tableView.rx.items(dataSource: dataSource)
             ).disposed(by: viewModel.disposeBag)
-        
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,14 +66,8 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     override func configure() {
         super.configure()
         tableView.register(TaskCell.self, forCellReuseIdentifier: TaskCell.Identifier)
-        //tableView.dataSource = self
         tableView.delegate = self
-//        tableView.isEditing = false
-//        self.setEditing(false, animated: true)
-        //tableView.rx.setDelegate(self)
-        
         configureReactiveTableView()
-        
     }
     
     func configureReactiveTableView() {
@@ -99,25 +81,8 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             
             if let selectedRowIndexPath = self.tableView.indexPathForSelectedRow {
                 self.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
-            }         }).disposed(by: disposeBag)
-        
-        
-
-        
-        //TasksList.shared.uncompletedTasks.bind(to: tableView.dataSource)
-        /*TasksList.shared.dataSource
-            .bind(to: tableView.rx.items(cellIdentifier: TaskCell.Identifier, cellType: TaskCell.self)) {  row, element, cell in
-                //cell.textLabel?.text = "\(element.text) \(row)"
-                self.viewModel.taskViewModel.changeTask(element)
-                self.viewModel.configureTaskCell(cell, section: 0, row: row)
-                
-            }.disposed(by: disposeBag)*/
-        
-        
-        
-        
-        
-        
+            } 
+        }).disposed(by: disposeBag)
     }
     
     
@@ -131,16 +96,12 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return TasksList.shared.uncompletedTasks.value.count
-        } else {
-            return TasksList.shared.completedTasks.value.count
-        }
+        return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.Identifier, for: indexPath) as! TaskCell
-        viewModel.configureTaskCell(cell, indexPath: indexPath)
+        
         return cell
     }
     
@@ -166,13 +127,6 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         
         return [deleteAction,editAction]
     }
-    
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//        return UITableViewCell.EditingStyle.none
-//    }
-//    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-//        return false
-//    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true

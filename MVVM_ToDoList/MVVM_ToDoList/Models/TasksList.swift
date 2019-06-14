@@ -15,24 +15,5 @@ typealias Section = SectionModel<String, TaskModel>
 
 class TasksList {
     static let shared = TasksList()
-    let completedTasks: BehaviorRelay<[TaskModel]> = BehaviorRelay(value:[])
-    let uncompletedTasks: BehaviorRelay<[TaskModel]> = BehaviorRelay(value:[])
-    
-    var sections = [SectionModel<String,TaskModel>(model: "Uncompleted", items: [TaskModel()]), SectionModel<String,TaskModel>(model: "Completed", items: [TaskModel(),TaskModel()]) ]
-    
-    var items: Observable<[SectionModel<String,TaskModel>]>
-    
-    //let sect = Variable<SectionModel<String,TaskModel>([])
-    
     let sect = Variable<[Section]>([])
-    
-    init() {
-        items = Observable.just(sections)
-    }
-    
-    func update(_ task: TaskModel) {
-        sections[0].items.append(task)
-        items = Observable.just(sections)
-    }
-    
 }
