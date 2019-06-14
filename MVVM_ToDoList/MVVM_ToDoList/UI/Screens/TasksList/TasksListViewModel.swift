@@ -31,6 +31,12 @@ class TasksListViewModel: ViewModel {
         services.sceneCoordinator.transition(to: Scene.addTask(AddTaskViewModel(services: services, taskForEdit: task)), type: .push, animated: true)
     }
     
+    func deleteTask(_ task: TaskModel, indexPath: IndexPath) {
+        print("Delete")
+        services.database.deleteTask(task)
+        TasksList.shared.sect.value[indexPath.section].items.remove(at: indexPath.row)
+    }
+    
     func selectCell(_ cell: TaskCell, indexPath: IndexPath) {
         let task = TasksList.shared.sect.value[indexPath.section].items[indexPath.row]
         task.completed = !task.completed
@@ -41,8 +47,6 @@ class TasksListViewModel: ViewModel {
         formatter.dateFormat = "dd-MM-yyyy HH-mm-ss"
         services.database.editTask(task, editItems: [["completed":task.completed ? 1 : 0],["createDate":formatter.string(from: Date())]])
     }
-    
-    
     
     
     

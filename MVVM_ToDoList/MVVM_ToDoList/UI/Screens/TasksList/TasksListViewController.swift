@@ -47,6 +47,9 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         dataSource.titleForHeaderInSection = { dataSource, index in
             return dataSource.sectionModels[index].model
         }
+        dataSource.canEditRowAtIndexPath = { _, _ in
+            return true
+        }
         
         TasksListViewModel.initDataSource().map { (customDatas) -> [Section] in
             [Section(model: "Uncompleted", items: []),
@@ -116,13 +119,8 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             
         })
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath:IndexPath) -> Void in
-            if indexPath.section == 0 {
-                
-            } else {
-                
-            }
-            let indexPaths = [indexPath]
-            tableView.deleteRows(at: indexPaths, with: .automatic)
+            let task = TasksList.shared.sect.value[indexPath.section].items[indexPath.row]
+            self.viewModel.deleteTask(task,indexPath: indexPath )
         })
         
         return [deleteAction,editAction]

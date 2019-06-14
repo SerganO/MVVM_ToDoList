@@ -31,6 +31,17 @@ class AddTaskViewModel: ViewModel {
         TasksList.shared.sect.value[0].items.append(task)
     }
     
+    func editTask(_ task:TaskModel) {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .medium
+        formatter.dateFormat = "dd-MM-yyyy HH-mm-ss"
+        services.database.editTask(task, editItems: [
+            ["text": task.text],
+            ["createDate": formatter.string(from: Date())]
+            ])
+    }
+    
     override init(services: Services) {
         super.init(services: services)
     }

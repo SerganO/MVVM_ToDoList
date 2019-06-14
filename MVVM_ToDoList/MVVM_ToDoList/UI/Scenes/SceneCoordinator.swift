@@ -82,7 +82,7 @@ class SceneCoordinator: SceneCoordinatorType {
     }
     
     
-    
+    @discardableResult
     func _transition(to scene: SceneType, type: SceneTransitionType, animated: Bool) -> Completable {
         let subject = PublishSubject<Void>()
         let viewController = scene.viewController()

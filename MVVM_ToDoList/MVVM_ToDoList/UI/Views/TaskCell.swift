@@ -28,7 +28,7 @@ class TaskCell: UITableViewCell {
     
     func constructor() {
         
-        let container = UIView(frame: .zero)
+        let container = UIView()
         contentView.addSubview(container)
         
         container.snp.makeConstraints { (make) in
@@ -37,20 +37,20 @@ class TaskCell: UITableViewCell {
         
         container.addSubview(taskCompletedImageView)
         taskCompletedImageView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(5)
-            make.bottom.equalToSuperview().offset(-5)
+            make.centerY.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview().offset(5)
+            make.bottom.greaterThanOrEqualToSuperview().offset(-5)
             make.leading.equalToSuperview().offset(5)
             make.width.equalTo(taskCompletedImageView.snp.height)
         }
         
         container.addSubview(taskTextLabel)
-        taskTextLabel.translatesAutoresizingMaskIntoConstraints = false
         taskTextLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         taskTextLabel.textAlignment = .left
         taskTextLabel.snp.makeConstraints { (make) in
-            //make.centerY.equalTo(taskCompletedImageView)
-            make.top.equalToSuperview().offset(5)
-            make.bottom.equalToSuperview().offset(-5)
+            make.centerY.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview().offset(5)
+            make.bottom.greaterThanOrEqualToSuperview().offset(-5)
             make.leading.equalTo(taskCompletedImageView.snp.trailing).offset(10)
             make.height.equalTo(taskTextLabel.font.lineHeight)
         }

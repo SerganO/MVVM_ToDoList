@@ -29,9 +29,15 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
         button.setTitle("Done", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.rx.tap.bind {
-            let task = self.viewModel.createTask(self.textView.text)
-            self.viewModel.addTask(task)
-            self.viewModel.services.sceneCoordinator.pop()
+                if let editItem = self.viewModel.taskForEdit {
+                    editItem.text = self.textView.text
+                    self.viewModel.editTask(editItem)
+                    self.viewModel.services.sceneCoordinator.pop()
+                } else {
+                    let task = self.viewModel.createTask(self.textView.text)
+                    self.viewModel.addTask(task)
+                    self.viewModel.services.sceneCoordinator.pop()
+                }
             }.disposed(by: viewModel.disposeBag)
         doneButton = UIBarButtonItem.init(customView: button)
         navigationItem.rightBarButtonItem = doneButton
