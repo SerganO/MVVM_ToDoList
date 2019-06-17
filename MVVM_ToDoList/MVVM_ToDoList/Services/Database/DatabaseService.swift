@@ -11,7 +11,7 @@ import Foundation
 protocol DatabaseService {
     func syncLocal()
     func setUserRef(_ pathString: String)
-    func addTask(_ task:TaskModel)
+    func addTask(_ task: TaskModel)
     func editTask(_ task: TaskModel, editItems:[[String: Any]])
     func deleteTask( _ task: TaskModel)
 }

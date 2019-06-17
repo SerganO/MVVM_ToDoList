@@ -15,5 +15,5 @@ typealias Section = SectionModel<String, TaskModel>
 
 class TasksList {
     static let shared = TasksList()
-    let sect = Variable<[Section]>([])
+    let sections = Variable<[Section]>([])
 }

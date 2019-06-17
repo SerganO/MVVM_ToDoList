@@ -54,9 +54,9 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         TasksListViewModel.initDataSource().map { (customDatas) -> [Section] in
             [Section(model: "Uncompleted", items: []),
              Section(model: "Completed", items: [])]
-            }.bind(to: TasksList.shared.sect).disposed(by: viewModel.disposeBag)
+            }.bind(to: TasksList.shared.sections).disposed(by: viewModel.disposeBag)
         
-        TasksList.shared.sect.asDriver().drive(
+        TasksList.shared.sections.asDriver().drive(
                 tableView.rx.items(dataSource: dataSource)
             ).disposed(by: viewModel.disposeBag)
     }
@@ -114,13 +114,19 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?  {
         let editAction = UITableViewRowAction(style: .normal, title: "Edit" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
             
-            let task = TasksList.shared.sect.value[indexPath.section].items[indexPath.row]
+            let task = TasksList.shared.sections.value[indexPath.section].items[indexPath.row]
             self.viewModel.editTask(task)
             
         })
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath:IndexPath) -> Void in
-            let task = TasksList.shared.sect.value[indexPath.section].items[indexPath.row]
+            
+            let task = TasksList.shared.sections.value[indexPath.section].items[indexPath.row]
             self.viewModel.deleteTask(task,indexPath: indexPath )
+            
+//            self.tableView.beginUpdates()
+//            let indexPaths = [indexPath]
+//            self.tableView.deleteRows(at: indexPaths, with: .automatic)
+//            self.tableView.endUpdates()
         })
         
         return [deleteAction,editAction]

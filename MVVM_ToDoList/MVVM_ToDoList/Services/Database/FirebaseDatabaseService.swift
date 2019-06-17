@@ -16,15 +16,15 @@ class FirebaseDatabaseService: DatabaseService {
     
     func syncLocal() {
         UserRef.child("tasks").queryOrdered(byChild: "createDate").observe(.value) { (snapshot) in
-            TasksList.shared.sect.value[0].items.removeAll()
-            TasksList.shared.sect.value[1].items.removeAll()
+            TasksList.shared.sections.value[0].items.removeAll()
+            TasksList.shared.sections.value[1].items.removeAll()
             for child in snapshot.children {
                 if let snapshot = child as? DataSnapshot,
                     let task = TaskModel(snapshot: snapshot) {
                     if task.completed {
-                        TasksList.shared.sect.value[1].items.insert(task, at: 0)
+                        TasksList.shared.sections.value[1].items.insert(task, at: 0)
                     } else {
-                        TasksList.shared.sect.value[0].items.insert(task, at: 0)
+                        TasksList.shared.sections.value[0].items.insert(task, at: 0)
                     }
                 }
             }

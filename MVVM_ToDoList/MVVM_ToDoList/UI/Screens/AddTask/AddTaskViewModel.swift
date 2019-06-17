@@ -28,7 +28,7 @@ class AddTaskViewModel: ViewModel {
     
     func addTask(_ task: TaskModel) {
         services.database.addTask(task)
-        TasksList.shared.sect.value[0].items.append(task)
+        TasksList.shared.sections.value[0].items.append(task)
     }
     
     func editTask(_ task:TaskModel) {

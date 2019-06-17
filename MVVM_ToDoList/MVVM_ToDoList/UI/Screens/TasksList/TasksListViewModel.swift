@@ -34,12 +34,13 @@ class TasksListViewModel: ViewModel {
     func deleteTask(_ task: TaskModel, indexPath: IndexPath) {
         print("Delete")
         services.database.deleteTask(task)
-        TasksList.shared.sect.value[indexPath.section].items.remove(at: indexPath.row)
+        TasksList.shared.sections.value[indexPath.section].items.remove(at: indexPath.row)
     }
     
     func selectCell(_ cell: TaskCell, indexPath: IndexPath) {
-        let task = TasksList.shared.sect.value[indexPath.section].items[indexPath.row]
+        let task = TasksList.shared.sections.value[indexPath.section].items[indexPath.row]
         task.completed = !task.completed
+        task.createDate = Date()
         TasksListViewModel.configureTaskCell(task, cell: cell)
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
