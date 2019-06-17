@@ -45,17 +45,14 @@ class TaskCell: UITableViewCell {
         }
         
         container.addSubview(taskTextLabel)
-        taskTextLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        taskTextLabel.font = UIFont.preferredFont(forTextStyle: .title2)
         taskTextLabel.textAlignment = .left
         taskTextLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.top.greaterThanOrEqualToSuperview().offset(5)
             make.bottom.greaterThanOrEqualToSuperview().offset(-5)
             make.leading.equalTo(taskCompletedImageView.snp.trailing).offset(10)
-            make.height.equalTo(taskTextLabel.font.lineHeight)
         }
-        
-        
         
     }
 

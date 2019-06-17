@@ -27,6 +27,7 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "To Do List"
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
@@ -51,14 +52,10 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             return true
         }
         
-        TasksListViewModel.initDataSource().map { (customDatas) -> [Section] in
-            [Section(model: "Uncompleted", items: []),
-             Section(model: "Completed", items: [])]
-            }.bind(to: TasksList.shared.sections).disposed(by: viewModel.disposeBag)
-        
-        TasksList.shared.sections.asDriver().drive(
+        viewModel.sections.asDriver().drive(
                 tableView.rx.items(dataSource: dataSource)
             ).disposed(by: viewModel.disposeBag)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -113,20 +110,19 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?  {
         let editAction = UITableViewRowAction(style: .normal, title: "Edit" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
-            
-            let task = TasksList.shared.sections.value[indexPath.section].items[indexPath.row]
+           
+            let task = self.viewModel.sections.value[indexPath.section].items[indexPath.row]
             self.viewModel.editTask(task)
             
         })
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath:IndexPath) -> Void in
-            
-            let task = TasksList.shared.sections.value[indexPath.section].items[indexPath.row]
+       
+            let task = self.viewModel.sections.value[indexPath.section].items[indexPath.row]
             self.viewModel.deleteTask(task,indexPath: indexPath )
             
-//            self.tableView.beginUpdates()
-//            let indexPaths = [indexPath]
-//            self.tableView.deleteRows(at: indexPaths, with: .automatic)
-//            self.tableView.endUpdates()
+            tableView.rx.itemDeleted.subscribe().disposed(by: self.viewModel.disposeBag)
+            
+            
         })
         
         return [deleteAction,editAction]
@@ -136,8 +132,8 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         return true
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 40
+//    }
     
 }

@@ -21,16 +21,15 @@ class TaskModel {
         uuid = UUID()
     }
     
-    init?(snapshot: DataSnapshot) {
+    init?(dictionary: [String:Any]) {
         
         guard
-            let value = snapshot.value as? [String:AnyObject],
-            let text = value["text"] as? String,
-            let createDate = value["createDate"] as? String,
-            let notificationDate = value["notificationDate"] as? String,
-            let completed = value["completed"] as? Bool,
-            let uuid = value["uuid"] as? String,
-            let orderID = value["orderID"] as? Int
+            let text = dictionary["text"] as? String,
+            let createDate = dictionary["createDate"] as? String,
+            let notificationDate = dictionary["notificationDate"] as? String,
+            let completed = dictionary["completed"] as? Bool,
+            let uuid = dictionary["uuid"] as? String,
+            let orderID = dictionary["orderID"] as? Int
             else {
                 return nil
         }

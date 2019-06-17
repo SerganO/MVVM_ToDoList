@@ -11,9 +11,12 @@ import Foundation
 class Services {
     let sceneCoordinator: SceneCoordinator
     let database: DatabaseService
-    
+    let tasks: TasksService
+    let date: DateService
     public init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
         database = FirebaseDatabaseService()
+        tasks = FirebaseTasksService()
+        date = SimpleDateService()
     }
 }

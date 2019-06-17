@@ -27,8 +27,7 @@ class AddTaskViewModel: ViewModel {
     }
     
     func addTask(_ task: TaskModel) {
-        services.database.addTask(task)
-        TasksList.shared.sections.value[0].items.append(task)
+        services.database.addTask(task, for: "USER-1")
     }
     
     func editTask(_ task:TaskModel) {
@@ -39,7 +38,17 @@ class AddTaskViewModel: ViewModel {
         services.database.editTask(task, editItems: [
             ["text": task.text],
             ["createDate": formatter.string(from: Date())]
-            ])
+            ], for: "USER-1")
+        if let notDate = task.notificationDate {
+            services.database.editTask(task, editItems: [
+                ["notificationDate": formatter.string(from: notDate)]
+                ], for: "USER-1")
+        } else {
+            services.database.editTask(task, editItems: [
+                ["notificationDate": ""]
+                ], for: "USER-1")
+        }
+        
     }
     
     override init(services: Services) {

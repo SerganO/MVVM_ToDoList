@@ -8,56 +8,61 @@
 
 import Foundation
 import Firebase
+import RxSwift
+
 
 class FirebaseDatabaseService: DatabaseService {
-    
     let MainRef = Database.database().reference()
-    var UserRef = Database.database().reference(withPath: "users")
     
-    func syncLocal() {
-        UserRef.child("tasks").queryOrdered(byChild: "createDate").observe(.value) { (snapshot) in
-            TasksList.shared.sections.value[0].items.removeAll()
-            TasksList.shared.sections.value[1].items.removeAll()
-            for child in snapshot.children {
-                if let snapshot = child as? DataSnapshot,
-                    let task = TaskModel(snapshot: snapshot) {
-                    if task.completed {
-                        TasksList.shared.sections.value[1].items.insert(task, at: 0)
-                    } else {
-                        TasksList.shared.sections.value[0].items.insert(task, at: 0)
+    func tasks(for userID: String) -> Observable<[Section]> {
+        
+        return Observable.create({ (observer) -> Disposable in
+            let UserRef = self.MainRef.child("users").child(userID)
+            UserRef.child("tasks").queryOrdered(byChild: "createDate").observe(.value) { (snapshot) in
+                var newTasks = [Section(model: "Uncompleted", items: []), Section(model: "Completed", items: [])]
+                for child in snapshot.children {
+                    if let snapshot = child as? DataSnapshot,
+                        let task = TaskModel(dictionary: snapshot.value as? [String: Any] ?? [:]) {
+                        if task.completed {
+                            newTasks[1].items.insert(task, at: 0)
+                        } else {
+                            newTasks[0].items.insert(task, at: 0)
+                        }
                     }
+                    observer.onNext(newTasks)
                 }
             }
-        }
+            
+            return Disposables.create()
+        })
     }
     
-    func setUserRef(_ pathString: String) {
-        UserRef = MainRef.child("users").child(pathString)
-    }
     
-    public func addTask(_ task: TaskModel)
+    public func addTask(_ task: TaskModel, for userID: String)
     {
         let que = DispatchQueue.global()
         que.async {
-            let taskRef = self.UserRef.child("tasks").child(task.uuid!.uuidString)
+            let UserRef = self.MainRef.child("users").child(userID)
+            let taskRef = UserRef.child("tasks").child(task.uuid!.uuidString)
             taskRef.setValue(task.toDic())
         }
     }
     
-    public func editTask(_ task: TaskModel, editItems:[[String: Any]]) {
+    public func editTask(_ task: TaskModel, editItems:[[String: Any]], for userID: String) {
         let que = DispatchQueue.global()
         que.async {
-            
             for editItem in editItems {
-                self.UserRef.child("tasks").child(task.uuid!.uuidString).updateChildValues(editItem)
+                let UserRef = self.MainRef.child("users").child(userID)
+                UserRef.child("tasks").child(task.uuid!.uuidString).updateChildValues(editItem)
             }
         }
     }
     
-    public func deleteTask(_ task: TaskModel) {
+    public func deleteTask(_ task: TaskModel, for userID: String) {
         let que = DispatchQueue.global()
         que.async {
-            self.UserRef.child("tasks").child(task.uuid!.uuidString).removeValue()
+            let UserRef = self.MainRef.child("users").child(userID)
+            UserRef.child("tasks").child(task.uuid!.uuidString).removeValue()
         }
     }
     

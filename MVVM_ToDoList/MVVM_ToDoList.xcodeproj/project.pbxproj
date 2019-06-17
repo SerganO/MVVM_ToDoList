@@ -16,12 +16,17 @@
 		EC1A1ED822AFE2A100E428F6 /* MVVM_ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1ED722AFE2A100E428F6 /* MVVM_ToDoListTests.swift */; };
 		EC1A1EE322AFE2A100E428F6 /* MVVM_ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EE222AFE2A100E428F6 /* MVVM_ToDoListUITests.swift */; };
 		EC1A1EF622AFEADD00E428F6 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */; };
+		EC8AD9D022B793FC00120EF5 /* TasksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9CF22B793FC00120EF5 /* TasksService.swift */; };
+		EC8AD9D222B7949A00120EF5 /* FirebaseTasksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9D122B7949A00120EF5 /* FirebaseTasksService.swift */; };
+		EC8AD9D722B7C7AC00120EF5 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9D622B7C7AC00120EF5 /* DateViewModel.swift */; };
+		EC8AD9D922B7C7B900120EF5 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9D822B7C7B900120EF5 /* DateViewController.swift */; };
+		EC8AD9E122B7D7B200120EF5 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9E022B7D7B200120EF5 /* DateService.swift */; };
+		EC8AD9E322B7D7C600120EF5 /* SimpleDateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9E222B7D7C600120EF5 /* SimpleDateService.swift */; };
 		ECB0E22622B24E510002B3B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ECB0E22522B24E510002B3B4 /* GoogleService-Info.plist */; };
 		ECB0E22822B24F0C0002B3B4 /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0E22722B24F0C0002B3B4 /* DatabaseService.swift */; };
 		ECB0E22B22B2500B0002B3B4 /* FirebaseDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0E22A22B2500B0002B3B4 /* FirebaseDatabaseService.swift */; };
 		ECB0E22E22B268310002B3B4 /* AddTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0E22D22B268310002B3B4 /* AddTaskViewModel.swift */; };
 		ECB0E23022B268760002B3B4 /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0E22F22B268760002B3B4 /* AddTaskViewController.swift */; };
-		ECB0E23422B27AA30002B3B4 /* TasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB0E23322B27AA30002B3B4 /* TasksList.swift */; };
 		ECB16CA422B0FEF800A9D12A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CA322B0FEF800A9D12A /* ViewModel.swift */; };
 		ECB16CA922B105E400A9D12A /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CA822B105E400A9D12A /* TaskCell.swift */; };
 		ECB16CAD22B10DDA00A9D12A /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CAC22B10DDA00A9D12A /* NavigationViewModel.swift */; };
@@ -73,12 +78,17 @@
 		EC1A1EE222AFE2A100E428F6 /* MVVM_ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVM_ToDoListUITests.swift; sourceTree = "<group>"; };
 		EC1A1EE422AFE2A100E428F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		EC8AD9CF22B793FC00120EF5 /* TasksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksService.swift; sourceTree = "<group>"; };
+		EC8AD9D122B7949A00120EF5 /* FirebaseTasksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTasksService.swift; sourceTree = "<group>"; };
+		EC8AD9D622B7C7AC00120EF5 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
+		EC8AD9D822B7C7B900120EF5 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		EC8AD9E022B7D7B200120EF5 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
+		EC8AD9E222B7D7C600120EF5 /* SimpleDateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDateService.swift; sourceTree = "<group>"; };
 		ECB0E22522B24E510002B3B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ECB0E22722B24F0C0002B3B4 /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
 		ECB0E22A22B2500B0002B3B4 /* FirebaseDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseService.swift; sourceTree = "<group>"; };
 		ECB0E22D22B268310002B3B4 /* AddTaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewModel.swift; sourceTree = "<group>"; };
 		ECB0E22F22B268760002B3B4 /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
-		ECB0E23322B27AA30002B3B4 /* TasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksList.swift; sourceTree = "<group>"; };
 		ECB16CA322B0FEF800A9D12A /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		ECB16CA822B105E400A9D12A /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		ECB16CAC22B10DDA00A9D12A /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
@@ -195,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */,
-				ECB0E23322B27AA30002B3B4 /* TasksList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -237,6 +246,7 @@
 				EC7889F722B3DA2D000D8019 /* Splash */,
 				EC7889F922B3DA66000D8019 /* TasksList */,
 				EC7889FA22B3DA74000D8019 /* AddTask */,
+				EC8AD9D522B7C78E00120EF5 /* Date */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -286,6 +296,33 @@
 			path = AddTask;
 			sourceTree = "<group>";
 		};
+		EC8AD9CE22B793DB00120EF5 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				EC8AD9CF22B793FC00120EF5 /* TasksService.swift */,
+				EC8AD9D122B7949A00120EF5 /* FirebaseTasksService.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		EC8AD9D522B7C78E00120EF5 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				EC8AD9D822B7C7B900120EF5 /* DateViewController.swift */,
+				EC8AD9D622B7C7AC00120EF5 /* DateViewModel.swift */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
+		EC8AD9DF22B7D7A300120EF5 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				EC8AD9E022B7D7B200120EF5 /* DateService.swift */,
+				EC8AD9E222B7D7C600120EF5 /* SimpleDateService.swift */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
 		ECB0E22922B24F120002B3B4 /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,8 +345,10 @@
 			isa = PBXGroup;
 			children = (
 				ECB16CB422B1122500A9D12A /* Services.swift */,
+				EC8AD9DF22B7D7A300120EF5 /* Date */,
 				ECB16CC722B1253200A9D12A /* Scenes */,
 				ECB0E22922B24F120002B3B4 /* Database */,
+				EC8AD9CE22B793DB00120EF5 /* Tasks */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -558,8 +597,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC8AD9D922B7C7B900120EF5 /* DateViewController.swift in Sources */,
+				EC8AD9D722B7C7AC00120EF5 /* DateViewModel.swift in Sources */,
 				EC1A1EF622AFEADD00E428F6 /* TaskModel.swift in Sources */,
 				EC1A1EC522AFE2A000E428F6 /* ViewController.swift in Sources */,
+				EC8AD9E322B7D7C600120EF5 /* SimpleDateService.swift in Sources */,
 				ECB16CD122B12B2000A9D12A /* SceneTransitionType.swift in Sources */,
 				ECB16CC622B1210B00A9D12A /* SplashViewController.swift in Sources */,
 				ECB16CC222B11B5700A9D12A /* TasksListViewController.swift in Sources */,
@@ -569,17 +611,19 @@
 				ECB16CC422B120E700A9D12A /* SplashViewModel.swift in Sources */,
 				ECB16CA422B0FEF800A9D12A /* ViewModel.swift in Sources */,
 				ECB0E22E22B268310002B3B4 /* AddTaskViewModel.swift in Sources */,
+				EC8AD9E122B7D7B200120EF5 /* DateService.swift in Sources */,
 				ECB16CCD22B129BE00A9D12A /* SceneCoordinator.swift in Sources */,
+				EC8AD9D222B7949A00120EF5 /* FirebaseTasksService.swift in Sources */,
 				ECB16CAD22B10DDA00A9D12A /* NavigationViewModel.swift in Sources */,
 				ECB0E22B22B2500B0002B3B4 /* FirebaseDatabaseService.swift in Sources */,
 				ECB16CCB22B1284F00A9D12A /* NavigationController.swift in Sources */,
 				ECB16CB022B10F3800A9D12A /* Scene.swift in Sources */,
 				ECB0E23022B268760002B3B4 /* AddTaskViewController.swift in Sources */,
+				EC8AD9D022B793FC00120EF5 /* TasksService.swift in Sources */,
 				ECB16CB522B1122500A9D12A /* Services.swift in Sources */,
 				ECB16CA922B105E400A9D12A /* TaskCell.swift in Sources */,
 				EC1A1EC322AFE2A000E428F6 /* AppDelegate.swift in Sources */,
 				ECB0E22822B24F0C0002B3B4 /* DatabaseService.swift in Sources */,
-				ECB0E23422B27AA30002B3B4 /* TasksList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
