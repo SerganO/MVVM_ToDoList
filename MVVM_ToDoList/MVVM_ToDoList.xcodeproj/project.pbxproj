@@ -16,6 +16,8 @@
 		EC1A1ED822AFE2A100E428F6 /* MVVM_ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1ED722AFE2A100E428F6 /* MVVM_ToDoListTests.swift */; };
 		EC1A1EE322AFE2A100E428F6 /* MVVM_ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EE222AFE2A100E428F6 /* MVVM_ToDoListUITests.swift */; };
 		EC1A1EF622AFEADD00E428F6 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */; };
+		EC68EE9E22B8D55300DD0FAC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EE9D22B8D55300DD0FAC /* NotificationService.swift */; };
+		EC68EEA022B8D56B00DD0FAC /* SimpleNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EE9F22B8D56B00DD0FAC /* SimpleNotificationService.swift */; };
 		EC8AD9D022B793FC00120EF5 /* TasksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9CF22B793FC00120EF5 /* TasksService.swift */; };
 		EC8AD9D222B7949A00120EF5 /* FirebaseTasksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9D122B7949A00120EF5 /* FirebaseTasksService.swift */; };
 		EC8AD9D722B7C7AC00120EF5 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9D622B7C7AC00120EF5 /* DateViewModel.swift */; };
@@ -78,6 +80,8 @@
 		EC1A1EE222AFE2A100E428F6 /* MVVM_ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVM_ToDoListUITests.swift; sourceTree = "<group>"; };
 		EC1A1EE422AFE2A100E428F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		EC68EE9D22B8D55300DD0FAC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		EC68EE9F22B8D56B00DD0FAC /* SimpleNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNotificationService.swift; sourceTree = "<group>"; };
 		EC8AD9CF22B793FC00120EF5 /* TasksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksService.swift; sourceTree = "<group>"; };
 		EC8AD9D122B7949A00120EF5 /* FirebaseTasksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTasksService.swift; sourceTree = "<group>"; };
 		EC8AD9D622B7C7AC00120EF5 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
@@ -207,6 +211,15 @@
 				EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EC68EE9C22B8D53400DD0FAC /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				EC68EE9D22B8D55300DD0FAC /* NotificationService.swift */,
+				EC68EE9F22B8D56B00DD0FAC /* SimpleNotificationService.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		EC7889F222B3D86A000D8019 /* UI */ = {
@@ -349,6 +362,7 @@
 				ECB16CC722B1253200A9D12A /* Scenes */,
 				ECB0E22922B24F120002B3B4 /* Database */,
 				EC8AD9CE22B793DB00120EF5 /* Tasks */,
+				EC68EE9C22B8D53400DD0FAC /* Notification */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -598,6 +612,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC8AD9D922B7C7B900120EF5 /* DateViewController.swift in Sources */,
+				EC68EEA022B8D56B00DD0FAC /* SimpleNotificationService.swift in Sources */,
 				EC8AD9D722B7C7AC00120EF5 /* DateViewModel.swift in Sources */,
 				EC1A1EF622AFEADD00E428F6 /* TaskModel.swift in Sources */,
 				EC1A1EC522AFE2A000E428F6 /* ViewController.swift in Sources */,
@@ -613,6 +628,7 @@
 				ECB0E22E22B268310002B3B4 /* AddTaskViewModel.swift in Sources */,
 				EC8AD9E122B7D7B200120EF5 /* DateService.swift in Sources */,
 				ECB16CCD22B129BE00A9D12A /* SceneCoordinator.swift in Sources */,
+				EC68EE9E22B8D55300DD0FAC /* NotificationService.swift in Sources */,
 				EC8AD9D222B7949A00120EF5 /* FirebaseTasksService.swift in Sources */,
 				ECB16CAD22B10DDA00A9D12A /* NavigationViewModel.swift in Sources */,
 				ECB0E22B22B2500B0002B3B4 /* FirebaseDatabaseService.swift in Sources */,

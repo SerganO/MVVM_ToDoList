@@ -13,10 +13,13 @@ class Services {
     let database: DatabaseService
     let tasks: TasksService
     let date: DateService
+    let notification: NotificationService
+    
     public init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
         database = FirebaseDatabaseService()
         tasks = FirebaseTasksService()
         date = SimpleDateService()
+        notification = SimpleNotificationService()
     }
 }

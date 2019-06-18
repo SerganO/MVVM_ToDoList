@@ -13,7 +13,7 @@ import Firebase
 
 class FirebaseTasksService: TasksService {
     
-    static var user = ""
+    
     let database = FirebaseDatabaseService()
     
     
@@ -22,15 +22,15 @@ class FirebaseTasksService: TasksService {
     }
     
     func addTask(_ task: TaskModel, for userID: String) {
-        
+        database.addTask(task, for: userID)
     }
     
     func editTask(_ task: TaskModel, editItems: [[String : Any]], for userID: String) {
-        
+        database.editTask(task, editItems: editItems, for: userID)
     }
     
     func deleteTask(_ task: TaskModel, for userID: String) {
-        
+        database.deleteTask(task, for: userID)
     }
     
     

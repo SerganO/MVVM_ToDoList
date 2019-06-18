@@ -11,6 +11,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import IQKeyboardManagerSwift
+import UserNotifications
 
 class AddTaskViewController: ViewController<AddTaskViewModel> {
     var textView = UITextView()
@@ -151,6 +152,7 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
             .withLatestFrom(shouldRemindSwitch.rx.value)
             .subscribe(onNext: { (isOn) in
                 if isOn {
+                    self.viewModel.services.notification.allowNotification()
                     self.remindContainer.snp.updateConstraints({ (update) in
                         update.height.equalTo(75)
                     })
@@ -180,4 +182,6 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
     func updateDueDateLabel() {
         dueDateLabel.text = formatter.string(from: dueDate)
     }
+    
+    
 }
