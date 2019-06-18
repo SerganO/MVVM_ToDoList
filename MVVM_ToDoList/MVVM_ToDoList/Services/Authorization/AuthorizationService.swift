@@ -11,5 +11,4 @@ import Foundation
 protocol AuthorizationService {
     var userID: String { get set }
     func checkAuthorization() -> Bool
-    
 }
