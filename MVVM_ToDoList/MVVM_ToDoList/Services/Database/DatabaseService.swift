@@ -14,4 +14,6 @@ protocol DatabaseService {
     func addTask(_ task: TaskModel, for userID: String)
     func editTask(_ task: TaskModel, editItems:[[String: Any]], for userID: String)
     func deleteTask( _ task: TaskModel, for userID: String)
+    
+    func checkUser(userID: String, type: userIDType) -> Observable<Bool>
 }

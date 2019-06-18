@@ -18,8 +18,16 @@
 		EC1A1EF622AFEADD00E428F6 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */; };
 		EC68EE9E22B8D55300DD0FAC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EE9D22B8D55300DD0FAC /* NotificationService.swift */; };
 		EC68EEA022B8D56B00DD0FAC /* SimpleNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EE9F22B8D56B00DD0FAC /* SimpleNotificationService.swift */; };
+		EC68EEA322B8EA7100DD0FAC /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EEA222B8EA7100DD0FAC /* AuthorizationService.swift */; };
+		EC68EEA522B8EBAC00DD0FAC /* FacebookAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EEA422B8EBAC00DD0FAC /* FacebookAuthorizationService.swift */; };
+		EC68EEA822B8ED5100DD0FAC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EEA722B8ED5100DD0FAC /* LoginViewController.swift */; };
+		EC68EEAA22B8ED6000DD0FAC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EEA922B8ED6000DD0FAC /* LoginViewModel.swift */; };
+		EC68EEAC22B8F21200DD0FAC /* userIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EEAB22B8F21200DD0FAC /* userIDs.swift */; };
+		EC68EEAF22B8F27100DD0FAC /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EEAE22B8F27100DD0FAC /* UserService.swift */; };
+		EC68EEB122B8F82B00DD0FAC /* SimpleUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EEB022B8F82B00DD0FAC /* SimpleUserService.swift */; };
+		EC68EEB322B8FE2E00DD0FAC /* userIDType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EEB222B8FE2E00DD0FAC /* userIDType.swift */; };
 		EC8AD9D022B793FC00120EF5 /* TasksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9CF22B793FC00120EF5 /* TasksService.swift */; };
-		EC8AD9D222B7949A00120EF5 /* FirebaseTasksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9D122B7949A00120EF5 /* FirebaseTasksService.swift */; };
+		EC8AD9D222B7949A00120EF5 /* SimpleTasksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9D122B7949A00120EF5 /* SimpleTasksService.swift */; };
 		EC8AD9D722B7C7AC00120EF5 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9D622B7C7AC00120EF5 /* DateViewModel.swift */; };
 		EC8AD9D922B7C7B900120EF5 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9D822B7C7B900120EF5 /* DateViewController.swift */; };
 		EC8AD9E122B7D7B200120EF5 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8AD9E022B7D7B200120EF5 /* DateService.swift */; };
@@ -82,8 +90,16 @@
 		EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		EC68EE9D22B8D55300DD0FAC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		EC68EE9F22B8D56B00DD0FAC /* SimpleNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNotificationService.swift; sourceTree = "<group>"; };
+		EC68EEA222B8EA7100DD0FAC /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
+		EC68EEA422B8EBAC00DD0FAC /* FacebookAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuthorizationService.swift; sourceTree = "<group>"; };
+		EC68EEA722B8ED5100DD0FAC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		EC68EEA922B8ED6000DD0FAC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		EC68EEAB22B8F21200DD0FAC /* userIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userIDs.swift; sourceTree = "<group>"; };
+		EC68EEAE22B8F27100DD0FAC /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		EC68EEB022B8F82B00DD0FAC /* SimpleUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleUserService.swift; sourceTree = "<group>"; };
+		EC68EEB222B8FE2E00DD0FAC /* userIDType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userIDType.swift; sourceTree = "<group>"; };
 		EC8AD9CF22B793FC00120EF5 /* TasksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksService.swift; sourceTree = "<group>"; };
-		EC8AD9D122B7949A00120EF5 /* FirebaseTasksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTasksService.swift; sourceTree = "<group>"; };
+		EC8AD9D122B7949A00120EF5 /* SimpleTasksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTasksService.swift; sourceTree = "<group>"; };
 		EC8AD9D622B7C7AC00120EF5 /* DateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
 		EC8AD9D822B7C7B900120EF5 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		EC8AD9E022B7D7B200120EF5 /* DateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateService.swift; sourceTree = "<group>"; };
@@ -209,6 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */,
+				EC68EEAB22B8F21200DD0FAC /* userIDs.swift */,
+				EC68EEB222B8FE2E00DD0FAC /* userIDType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -220,6 +238,33 @@
 				EC68EE9F22B8D56B00DD0FAC /* SimpleNotificationService.swift */,
 			);
 			path = Notification;
+			sourceTree = "<group>";
+		};
+		EC68EEA122B8EA2000DD0FAC /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				EC68EEA222B8EA7100DD0FAC /* AuthorizationService.swift */,
+				EC68EEA422B8EBAC00DD0FAC /* FacebookAuthorizationService.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		EC68EEA622B8ED3C00DD0FAC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EC68EEA722B8ED5100DD0FAC /* LoginViewController.swift */,
+				EC68EEA922B8ED6000DD0FAC /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		EC68EEAD22B8F26100DD0FAC /* User */ = {
+			isa = PBXGroup;
+			children = (
+				EC68EEAE22B8F27100DD0FAC /* UserService.swift */,
+				EC68EEB022B8F82B00DD0FAC /* SimpleUserService.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		EC7889F222B3D86A000D8019 /* UI */ = {
@@ -254,6 +299,7 @@
 		EC7889F522B3DA0C000D8019 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				EC68EEA622B8ED3C00DD0FAC /* Login */,
 				EC7889F822B3DA3C000D8019 /* ViewController */,
 				EC7889F622B3DA19000D8019 /* Navigation */,
 				EC7889F722B3DA2D000D8019 /* Splash */,
@@ -313,7 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				EC8AD9CF22B793FC00120EF5 /* TasksService.swift */,
-				EC8AD9D122B7949A00120EF5 /* FirebaseTasksService.swift */,
+				EC8AD9D122B7949A00120EF5 /* SimpleTasksService.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -358,6 +404,8 @@
 			isa = PBXGroup;
 			children = (
 				ECB16CB422B1122500A9D12A /* Services.swift */,
+				EC68EEAD22B8F26100DD0FAC /* User */,
+				EC68EEA122B8EA2000DD0FAC /* Authorization */,
 				EC8AD9DF22B7D7A300120EF5 /* Date */,
 				ECB16CC722B1253200A9D12A /* Scenes */,
 				ECB0E22922B24F120002B3B4 /* Database */,
@@ -612,7 +660,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC8AD9D922B7C7B900120EF5 /* DateViewController.swift in Sources */,
+				EC68EEB322B8FE2E00DD0FAC /* userIDType.swift in Sources */,
 				EC68EEA022B8D56B00DD0FAC /* SimpleNotificationService.swift in Sources */,
+				EC68EEAA22B8ED6000DD0FAC /* LoginViewModel.swift in Sources */,
+				EC68EEAC22B8F21200DD0FAC /* userIDs.swift in Sources */,
 				EC8AD9D722B7C7AC00120EF5 /* DateViewModel.swift in Sources */,
 				EC1A1EF622AFEADD00E428F6 /* TaskModel.swift in Sources */,
 				EC1A1EC522AFE2A000E428F6 /* ViewController.swift in Sources */,
@@ -623,15 +674,20 @@
 				ECB16CC922B1254500A9D12A /* SceneType.swift in Sources */,
 				ECB16CB222B110E900A9D12A /* TasksListViewModel.swift in Sources */,
 				ECB16CCF22B12A9600A9D12A /* SceneCoordinatorType.swift in Sources */,
+				EC68EEA822B8ED5100DD0FAC /* LoginViewController.swift in Sources */,
 				ECB16CC422B120E700A9D12A /* SplashViewModel.swift in Sources */,
+				EC68EEB122B8F82B00DD0FAC /* SimpleUserService.swift in Sources */,
+				EC68EEA522B8EBAC00DD0FAC /* FacebookAuthorizationService.swift in Sources */,
 				ECB16CA422B0FEF800A9D12A /* ViewModel.swift in Sources */,
 				ECB0E22E22B268310002B3B4 /* AddTaskViewModel.swift in Sources */,
 				EC8AD9E122B7D7B200120EF5 /* DateService.swift in Sources */,
 				ECB16CCD22B129BE00A9D12A /* SceneCoordinator.swift in Sources */,
+				EC68EEAF22B8F27100DD0FAC /* UserService.swift in Sources */,
 				EC68EE9E22B8D55300DD0FAC /* NotificationService.swift in Sources */,
-				EC8AD9D222B7949A00120EF5 /* FirebaseTasksService.swift in Sources */,
+				EC8AD9D222B7949A00120EF5 /* SimpleTasksService.swift in Sources */,
 				ECB16CAD22B10DDA00A9D12A /* NavigationViewModel.swift in Sources */,
 				ECB0E22B22B2500B0002B3B4 /* FirebaseDatabaseService.swift in Sources */,
+				EC68EEA322B8EA7100DD0FAC /* AuthorizationService.swift in Sources */,
 				ECB16CCB22B1284F00A9D12A /* NavigationController.swift in Sources */,
 				ECB16CB022B10F3800A9D12A /* Scene.swift in Sources */,
 				ECB0E23022B268760002B3B4 /* AddTaskViewController.swift in Sources */,

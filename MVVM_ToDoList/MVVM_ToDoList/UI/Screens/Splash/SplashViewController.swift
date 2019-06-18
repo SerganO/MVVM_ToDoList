@@ -34,6 +34,10 @@ class SplashViewController: ViewController<SplashViewModel> {
         super.viewDidAppear(animated)
         //viewModel.services.database.setUserRef("USER-1")
         //viewModel.services.database.syncLocal()
-        viewModel.move()
+        if viewModel.services.facebookAuth.checkAuthorization() {
+            viewModel.moveToTask()
+        } else {
+            viewModel.moveToLogin()
+        }
     }
 }

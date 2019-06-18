@@ -11,6 +11,8 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import FacebookLogin
+import FBSDKLoginKit
 
 
 
@@ -19,6 +21,7 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     
     let tableView = UITableView(frame: .zero, style: .grouped)
     var addButton = UIBarButtonItem()
+    var logOutButton = UIBarButtonItem()
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, TaskModel>>(configureCell: { dataSource, tableView, indexPath, item in
                     let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.Identifier, for: indexPath) as! TaskCell
                     TasksListViewModel.configureTaskCell(item, cell: cell)
@@ -34,15 +37,45 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             make.edges.equalToSuperview()
         }
         
-        let button = UIButton()
-        button.setTitle("ADD", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.rx.tap.bind {
+        let add = UIButton()
+        add.setTitle("ADD", for: .normal)
+        add.setTitleColor(.black, for: .normal)
+        add.rx.tap.bind {
             self.viewModel.addTask()
             self.tableView.reloadData()
         }.disposed(by: viewModel.disposeBag)
-        addButton = UIBarButtonItem.init(customView: button)
+        addButton = UIBarButtonItem.init(customView: add)
         navigationItem.rightBarButtonItem = addButton
+        
+        let logOut = UIButton()
+        logOut.setTitle("LOG OUT", for: .normal)
+        logOut.setTitleColor(.black, for: .normal)
+        logOut.rx.tap.bind {
+            let loginManager = LoginManager()
+            loginManager.logOut()
+            FBSDKAccessToken.setCurrent(nil)
+            FBSDKProfile.setCurrent(nil)
+            let cookies = HTTPCookieStorage.shared
+            var facebookCookies = cookies.cookies(for: URL(string: "http://login.facebook.com")!)
+            for cookie in facebookCookies! {
+                cookies.deleteCookie(cookie )
+            }
+            facebookCookies = cookies.cookies(for: URL(string: "https://facebook.com/")!)
+            for cookie in facebookCookies! {
+                cookies.deleteCookie(cookie )
+            }
+            
+            let domain = Bundle.main.bundleIdentifier!
+            UserDefaults.standard.removePersistentDomain(forName: domain)
+            UserDefaults.standard.synchronize()
+            
+            
+            self.viewModel.services.notification.removeAllNotification()
+            self.viewModel.services.sceneCoordinator.pop()
+            }.disposed(by: viewModel.disposeBag)
+        logOutButton = UIBarButtonItem.init(customView: logOut)
+        navigationItem.leftBarButtonItem = logOutButton
+        
         navigationItem.hidesBackButton = true
         
         dataSource.titleForHeaderInSection = { dataSource, index in

@@ -11,10 +11,14 @@ import RxSwift
 import RxCocoa
 import Firebase
 
-class FirebaseTasksService: TasksService {
+class SimpleTasksService: TasksService {
     
     
-    let database = FirebaseDatabaseService()
+    let database: DatabaseService
+    
+    init(database: DatabaseService) {
+        self.database = database
+    }
     
     
     func tasks(for userID: String) -> Observable<[Section]> {

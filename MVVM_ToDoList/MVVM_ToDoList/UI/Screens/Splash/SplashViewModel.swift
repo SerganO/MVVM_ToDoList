@@ -9,13 +9,22 @@
 import UIKit
 
 class SplashViewModel: ViewModel {
-    /*init(services: Services) {
-        super.init(services: services)
-    }*/
-    
-    func move() {
+
+    func moveToLogin() {
         sleep(2)
         
-        services.sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: services)), type: .push, animated: true)
+        services.sceneCoordinator.transition(to: Scene.login(LoginViewModel(services: services)), type: .push, animated: true)
     }
+    
+    func moveToTask() {
+        sleep(2)
+        services.user.userIds.facebookID = services.facebookAuth.userID
+        services.sceneCoordinator.transition(to: Scene.login(LoginViewModel(services: services)), type: .push, animated: true)
+        services.sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: services)), type: .push, animated: true)
+       
+        
+    }
+    
+    
+    
 }

@@ -14,12 +14,16 @@ class Services {
     let tasks: TasksService
     let date: DateService
     let notification: NotificationService
+    var facebookAuth: AuthorizationService
+    let user: UserService
     
     public init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
         database = FirebaseDatabaseService()
-        tasks = FirebaseTasksService()
+        tasks = SimpleTasksService(database: database)
         date = SimpleDateService()
         notification = SimpleNotificationService()
+        facebookAuth = FacebookAuthorizationService()
+        user = SimpleUserService(database: database)
     }
 }

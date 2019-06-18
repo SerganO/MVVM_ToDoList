@@ -12,7 +12,39 @@ import RxSwift
 
 
 class FirebaseDatabaseService: DatabaseService {
+    
+    
     let MainRef = Database.database().reference()
+    func checkUser(userID: String, type: userIDType) -> Observable<Bool> {
+        
+        var typeString = ""
+        
+        switch type {
+        case .facebook:
+            typeString = "FacebookID"
+            break
+        case .google:
+            typeString = "GoogleID"
+            break
+        case .none:
+            break
+        }
+        
+        return Observable.create({ (observer) -> Disposable in
+            self.MainRef.child("Identifier").child(typeString).child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                
+                if snapshot.exists() {
+                    observer.onNext(true)
+                } else {
+                    observer.onNext(false)
+                }
+            })
+            return Disposables.create()
+        })
+    }
+    
+    
     
     func tasks(for userID: String) -> Observable<[Section]> {
         
