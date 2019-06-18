@@ -12,6 +12,40 @@ import RxSwift
 
 
 class FirebaseDatabaseService: DatabaseService {
+    func getUserUUID(userID: String, type: userIDType, completion : @escaping (Bool)-> Void) -> Observable<String> {
+        var typeString = ""
+        
+        switch type {
+        case .facebook:
+            typeString = "FacebookID"
+            break
+        case .google:
+            typeString = "GoogleID"
+            break
+        case .none:
+            break
+        }
+        
+        return Observable.create({ (observer) -> Disposable in
+            self.MainRef.child("Identifier").child(typeString).child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                
+                if snapshot.exists() {
+                    
+                    observer.onNext(snapshot.value as! String)
+                    completion(true)
+                }
+                else{
+                    let uuid = UUID().uuidString
+                    self.MainRef.child("Identifier").child(typeString).child(userID).setValue(uuid)
+                    observer.onNext(uuid)
+                    completion(true)
+                }
+            })
+            return Disposables.create()
+        })
+    }
+    
     
     
     let MainRef = Database.database().reference()
@@ -43,6 +77,8 @@ class FirebaseDatabaseService: DatabaseService {
             return Disposables.create()
         })
     }
+    
+    
     
     
     

@@ -10,9 +10,27 @@ import Foundation
 import RxSwift
 
 class SimpleUserService: UserService {
+    
+    
+    
+//    func login(for userID: String, type: userIDType, completion : @escaping (Bool)-> Void) -> Observable<String> {
+////        database.getUserUUID(userID: userID, type: type, completion: completion).subscribe(onNext: { (uuid) in
+////            self.userUuid.value = uuid
+////        }).disposed(by: DisposeBag())
+//        
+////        database.getUserUUID(userID: userID, type: type, completion: completion).subscribe({ (event) in
+////            if let uuid = event.element {
+////                self.userUuid.value = uuid
+////            }
+////        }).disposed(by: DisposeBag())
+//        
+//        database.getUserUUID(userID: userID, type: type, completion: completion).bind(to: userUuid).disposed(by: DisposeBag())
+//        
+//    }
+    
     var userIds = userIDs()
     
-    var userUuid: String = ""
+    var userUuid:Variable<String> = Variable<String>("")
     
     
     let database: DatabaseService
@@ -22,19 +40,11 @@ class SimpleUserService: UserService {
     }
     
     func getUserUUID() -> String {
-        var userID = ""
-        var type: userIDType = .none
-        if userIds.facebookID != "" {
-            userID = userIds.facebookID
-            type = .facebook
-        }
-        if userIds.googleID != "" {
-            userID = userIds.googleID
-            type = .google
-        }
-        
-      return userID
+        return userUuid.value
     }
+    
+    
+    
     
     
 }

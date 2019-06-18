@@ -16,4 +16,6 @@ protocol DatabaseService {
     func deleteTask( _ task: TaskModel, for userID: String)
     
     func checkUser(userID: String, type: userIDType) -> Observable<Bool>
+    
+    func getUserUUID(userID: String, type: userIDType, completion : @escaping (Bool)-> Void) -> Observable<String>
 }

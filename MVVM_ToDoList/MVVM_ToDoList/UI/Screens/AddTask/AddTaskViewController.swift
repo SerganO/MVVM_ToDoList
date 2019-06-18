@@ -183,5 +183,10 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
         dueDateLabel.text = formatter.string(from: dueDate)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        textView.becomeFirstResponder()
+    }
+    
     
 }

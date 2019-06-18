@@ -14,7 +14,11 @@ class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate {
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         if viewModel.services.facebookAuth.checkAuthorization() {
             viewModel.services.user.userIds.facebookID = viewModel.services.facebookAuth.userID
-            viewModel.move()
+            viewModel.services.database.getUserUUID(userID: viewModel.services.user.userIds.facebookID, type: .facebook, completion: {
+                (_) in
+                self.viewModel.move()
+            }).bind(to: viewModel.services.user.userUuid).disposed(by: disposeBag)
+            
         }
     }
     

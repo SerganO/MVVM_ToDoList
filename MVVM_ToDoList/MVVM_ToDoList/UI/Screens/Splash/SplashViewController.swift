@@ -12,6 +12,8 @@ import SnapKit
 class SplashViewController: ViewController<SplashViewModel> {
     let Label = UILabel()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -32,12 +34,15 @@ class SplashViewController: ViewController<SplashViewModel> {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //viewModel.services.database.setUserRef("USER-1")
-        //viewModel.services.database.syncLocal()
+        guard !viewModel.viewDidAppearCalled else {
+            return
+        }
         if viewModel.services.facebookAuth.checkAuthorization() {
             viewModel.moveToTask()
         } else {
             viewModel.moveToLogin()
         }
+        viewModel.viewDidAppearCalled = true
     }
+    
 }
