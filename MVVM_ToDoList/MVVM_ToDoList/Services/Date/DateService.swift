@@ -8,10 +8,11 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 protocol DateService {
     
-    var LastDate: Variable<Date> { get set }
+    var LastDate: BehaviorRelay<Date> { get set }
     
     func setDate(_ date: Date)
 }

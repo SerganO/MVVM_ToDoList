@@ -54,7 +54,7 @@ class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate, 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.services.user.navigationCompletion = {
+        viewModel.services.user.completionHandler = {
             (result) in
             self.viewModel.move()
         }

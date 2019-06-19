@@ -20,9 +20,10 @@ class ViewController<T: ViewModel>: UIViewController, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error == nil {
             viewModel.services.user.userIds.googleID = user.userID
+            viewModel.services.googleAuth.userID = user.userID
             viewModel.services.database.getUserUUID(userID: self.viewModel.services.user.userIds.googleID, type: .google, completion: {
                 (result) in
-                self.viewModel.services.user.navigationCompletion?(result)
+                self.viewModel.services.user.completionHandler?(result)
             }).bind(to: self.viewModel.services.user.userUuid).disposed(by: self.disposeBag)
         }
     }

@@ -13,3 +13,17 @@ enum userIDType {
     case google
     case none
 }
+
+extension userIDType {
+    func getTypeString() -> String {
+        switch self {
+        case .facebook:
+            return "FacebookID"
+        case .google:
+            return "GoogleID"
+        default:
+            return ""
+        }
+        
+    }
+}

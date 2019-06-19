@@ -26,9 +26,10 @@ class DateViewController: ViewController<DateViewModel> {
         let done = UIButton()
         done.setTitle("Done", for: .normal)
         done.setTitleColor(.black, for: .normal)
+        done.setTitleColor(.gray, for: .highlighted)
         done.rx.tap.bind {
             self.viewModel.services.sceneCoordinator.pop()
-            self.viewModel.services.date.LastDate.value = self.datePicker.date
+            self.viewModel.services.date.LastDate.accept(self.datePicker.date) 
             }.disposed(by: viewModel.disposeBag)
         doneButton = UIBarButtonItem.init(customView: done)
         navigationItem.rightBarButtonItem = doneButton
@@ -36,6 +37,7 @@ class DateViewController: ViewController<DateViewModel> {
         let back = UIButton()
         back.setTitle("Back", for: .normal)
         back.setTitleColor(.black, for: .normal)
+        back.setTitleColor(.gray, for: .highlighted)
         back.rx.tap.bind {
             self.viewModel.services.sceneCoordinator.pop()
             }.disposed(by: viewModel.disposeBag)

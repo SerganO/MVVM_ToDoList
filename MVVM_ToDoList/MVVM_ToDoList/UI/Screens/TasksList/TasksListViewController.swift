@@ -21,6 +21,7 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     
     let tableView = UITableView(frame: .zero, style: .grouped)
     var addButton = UIBarButtonItem()
+    var syncButton = UIBarButtonItem()
     var logOutButton = UIBarButtonItem()
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, TaskModel>>(configureCell: { dataSource, tableView, indexPath, item in
                     let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.Identifier, for: indexPath) as! TaskCell
@@ -40,40 +41,29 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         let add = UIButton()
         add.setTitle("ADD", for: .normal)
         add.setTitleColor(.black, for: .normal)
+        add.setTitleColor(.gray, for: .highlighted)
         add.rx.tap.bind {
-            self.viewModel.addTask()
-            self.tableView.reloadData()
+            self.addButtonTap()
         }.disposed(by: viewModel.disposeBag)
         addButton = UIBarButtonItem.init(customView: add)
         navigationItem.rightBarButtonItem = addButton
         
+        let sync = UIButton()
+        sync.setTitle("$", for: .normal)
+        sync.setTitleColor(.black, for: .normal)
+        sync.setTitleColor(.gray, for: .highlighted)
+        sync.rx.tap.bind {
+            self.syncButtonTap()
+            }.disposed(by: viewModel.disposeBag)
+        syncButton = UIBarButtonItem.init(customView: sync)
+        navigationItem.rightBarButtonItems?.append(syncButton)
+        
         let logOut = UIButton()
         logOut.setTitle("LOG OUT", for: .normal)
         logOut.setTitleColor(.black, for: .normal)
+        logOut.setTitleColor(.gray, for: .highlighted)
         logOut.rx.tap.bind {
-            let loginManager = LoginManager()
-            loginManager.logOut()
-            FBSDKAccessToken.setCurrent(nil)
-            FBSDKProfile.setCurrent(nil)
-            let cookies = HTTPCookieStorage.shared
-            var facebookCookies = cookies.cookies(for: URL(string: "http://login.facebook.com")!)
-            for cookie in facebookCookies! {
-                cookies.deleteCookie(cookie )
-            }
-            facebookCookies = cookies.cookies(for: URL(string: "https://facebook.com/")!)
-            for cookie in facebookCookies! {
-                cookies.deleteCookie(cookie )
-            }
-            
-            let domain = Bundle.main.bundleIdentifier!
-            UserDefaults.standard.removePersistentDomain(forName: domain)
-            UserDefaults.standard.synchronize()
-            
-            GIDSignIn.sharedInstance()?.signOut()
-            
-            
-            self.viewModel.services.notification.removeAllNotification()
-            self.viewModel.services.sceneCoordinator.pop()
+                self.logOutButtonTap()
             }.disposed(by: viewModel.disposeBag)
         logOutButton = UIBarButtonItem.init(customView: logOut)
         navigationItem.leftBarButtonItem = logOutButton
@@ -93,9 +83,70 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    func addButtonTap() {
+        viewModel.addTask()
+        tableView.reloadData()
+    }
+    
+    func syncButtonTap() {
+       
         
+        if viewModel.services.facebookAuth.userID == "" {
+            let loginManager = LoginManager()
+            loginManager.loginBehavior = .web
+            loginManager.logIn(readPermissions: [ .publicProfile, .email ], viewController: nil, completion: { (LoginResult) in
+                if let accessToken = FBSDKAccessToken.current(), FBSDKAccessToken.currentAccessTokenIsActive() {
+                    self.viewModel.services.facebookAuth.userID = accessToken.userID
+                    self.viewModel.services.database.syncUserID(newUserID: accessToken.userID, newType: .facebook, with: self.viewModel.services.user.userUuid.value, completion: { (result) in
+                        if result {
+                            self.syncButton.title = "SYNC"
+                        }
+                    })
+                }
+                
+            })
+        } else if viewModel.services.googleAuth.userID == "" {
+            viewModel.services.user.completionHandler = {
+                (result) in
+                if result {
+                    self.viewModel.services.database.syncUserID(newUserID: self.viewModel.services.googleAuth.userID, newType: .google, with: self.viewModel.services.user.userUuid.value, completion: { (result) in
+                        if result {
+                            self.syncButton.title = "SYNC"
+                        }
+                    })
+                }
+                
+            }
+            GIDSignIn.sharedInstance()?.signIn()
+        }
+        
+    }
+    
+    func logOutButtonTap() {
+        let loginManager = LoginManager()
+        loginManager.logOut()
+        FBSDKAccessToken.setCurrent(nil)
+        FBSDKProfile.setCurrent(nil)
+        let cookies = HTTPCookieStorage.shared
+        var facebookCookies = cookies.cookies(for: URL(string: "http://login.facebook.com")!)
+        for cookie in facebookCookies! {
+            cookies.deleteCookie(cookie )
+        }
+        facebookCookies = cookies.cookies(for: URL(string: "https://facebook.com/")!)
+        for cookie in facebookCookies! {
+            cookies.deleteCookie(cookie )
+        }
+        
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
+        
+        GIDSignIn.sharedInstance()?.signOut()
+        viewModel.services.facebookAuth.userID = ""
+        viewModel.services.googleAuth.userID = ""
+        
+        viewModel.services.notification.removeAllNotification()
+        viewModel.services.sceneCoordinator.pop()
     }
     
     override func configure() {

@@ -8,13 +8,14 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class SimpleUserService: UserService {
-    var navigationCompletion: ((Bool) -> Void)?
+    var completionHandler: ((Bool) -> Void)?
  
     var userIds = userIDs()
     
-    var userUuid:Variable<String> = Variable<String>("")
+    var userUuid:BehaviorRelay<String> = BehaviorRelay<String>(value: "")
     
     
     let database: DatabaseService

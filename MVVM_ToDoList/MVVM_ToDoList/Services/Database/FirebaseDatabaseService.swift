@@ -12,22 +12,22 @@ import RxSwift
 
 
 class FirebaseDatabaseService: DatabaseService {
+    let MainRef = Database.database().reference()
+    
+    
+    
+    func syncUserID(newUserID: String, newType: userIDType, with uuid: String, completion: @escaping (Bool) -> Void) {
+        self.MainRef.child("Identifier").child(newType.getTypeString()).child(newUserID).setValue(uuid)
+        self.MainRef.child("users").child(uuid).child("sync").setValue(true)
+        completion(true)
+    }
+    
+    
     func getUserUUID(userID: String, type: userIDType, completion : @escaping (Bool)-> Void) -> Observable<String> {
-        var typeString = ""
-        
-        switch type {
-        case .facebook:
-            typeString = "FacebookID"
-            break
-        case .google:
-            typeString = "GoogleID"
-            break
-        case .none:
-            break
-        }
+       
         
         return Observable.create({ (observer) -> Disposable in
-            self.MainRef.child("Identifier").child(typeString).child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            self.MainRef.child("Identifier").child(type.getTypeString()).child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 
                 if snapshot.exists() {
@@ -37,7 +37,8 @@ class FirebaseDatabaseService: DatabaseService {
                 }
                 else{
                     let uuid = UUID().uuidString
-                    self.MainRef.child("Identifier").child(typeString).child(userID).setValue(uuid)
+                    self.MainRef.child("Identifier").child(type.getTypeString()).child(userID).setValue(uuid)
+                    self.MainRef.child("users").child(uuid).child("sync").setValue(false)
                     observer.onNext(uuid)
                     completion(true)
                 }
@@ -45,41 +46,6 @@ class FirebaseDatabaseService: DatabaseService {
             return Disposables.create()
         })
     }
-    
-    
-    
-    let MainRef = Database.database().reference()
-    func checkUser(userID: String, type: userIDType) -> Observable<Bool> {
-        
-        var typeString = ""
-        
-        switch type {
-        case .facebook:
-            typeString = "FacebookID"
-            break
-        case .google:
-            typeString = "GoogleID"
-            break
-        case .none:
-            break
-        }
-        
-        return Observable.create({ (observer) -> Disposable in
-            self.MainRef.child("Identifier").child(typeString).child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                
-                if snapshot.exists() {
-                    observer.onNext(true)
-                } else {
-                    observer.onNext(false)
-                }
-            })
-            return Disposables.create()
-        })
-    }
-    
-    
-    
     
     
     func tasks(for userID: String) -> Observable<[Section]> {

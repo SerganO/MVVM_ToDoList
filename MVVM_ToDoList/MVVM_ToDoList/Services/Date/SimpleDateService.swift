@@ -8,12 +8,13 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class SimpleDateService : DateService {
-    var LastDate: Variable<Date> = Variable<Date>(Date())
+    var LastDate: BehaviorRelay<Date> = BehaviorRelay<Date>(value: Date())
     
     func setDate(_ date: Date) {
-        LastDate.value = date
+        LastDate.accept(date)
     }
     
     

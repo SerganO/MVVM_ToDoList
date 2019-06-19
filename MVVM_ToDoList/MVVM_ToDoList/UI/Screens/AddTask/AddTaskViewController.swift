@@ -74,6 +74,7 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
         
         setDateButton.setTitle("SET", for: .normal)
         setDateButton.setTitleColor(.black, for: .normal)
+        setDateButton.setTitleColor(.gray, for: .highlighted)
         remindContainer.addSubview(setDateButton)
         setDateButton.snp.makeConstraints { (make) in
             make.centerY.equalTo(dateLabel)
@@ -122,45 +123,21 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
             make.bottom.equalToSuperview()
         }
         
-        let button = UIButton()
-        button.setTitle("Done", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.rx.tap.bind {
-                if let editItem = self.viewModel.taskForEdit {
-                    editItem.text = self.textView.text
-                    if self.shouldRemindSwitch.isOn {
-                        editItem.notificationDate = self.dueDate
-                    } else {
-                        editItem.notificationDate = nil
-                    }
-                    self.viewModel.editTask(editItem)
-                    self.viewModel.services.sceneCoordinator.pop()
-                } else {
-                    let task = self.viewModel.createTask(self.textView.text)
-                    if self.shouldRemindSwitch.isOn {
-                        task.notificationDate = self.dueDate
-                    }
-                    self.viewModel.addTask(task)
-                    self.viewModel.services.sceneCoordinator.pop()
-                }
+        let done = UIButton()
+        done.setTitle("Done", for: .normal)
+        done.setTitleColor(.black, for: .normal)
+        done.setTitleColor(.gray, for: .highlighted)
+        done.rx.tap.bind {
+                self.doneButtonTap()
             }.disposed(by: viewModel.disposeBag)
-        doneButton = UIBarButtonItem.init(customView: button)
+        doneButton = UIBarButtonItem.init(customView: done)
         navigationItem.rightBarButtonItem = doneButton
         
         shouldRemindSwitch.rx
             .controlEvent(.valueChanged)
             .withLatestFrom(shouldRemindSwitch.rx.value)
             .subscribe(onNext: { (isOn) in
-                if isOn {
-                    self.viewModel.services.notification.allowNotification()
-                    self.remindContainer.snp.updateConstraints({ (update) in
-                        update.height.equalTo(75)
-                    })
-                } else {
-                    self.remindContainer.snp.updateConstraints({ (update) in
-                        update.height.equalTo(40)
-                    })
-                }
+                self.switchTap(isOn: isOn)
             }).disposed(by: viewModel.disposeBag)
         
     
@@ -177,6 +154,46 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
             navigationItem.title = "EDIT"
         }
         textView.font = UIFont.preferredFont(forTextStyle: .body)
+    }
+    
+    func doneButtonTap() {
+        guard textView.text != "" else {
+            let alert = UIAlertController(title: "Empty Task", message: "Please write anothing", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        if let editItem = viewModel.taskForEdit {
+            editItem.text = textView.text
+            if shouldRemindSwitch.isOn {
+                editItem.notificationDate = dueDate
+            } else {
+                editItem.notificationDate = nil
+            }
+            viewModel.editTask(editItem)
+            viewModel.services.sceneCoordinator.pop()
+        } else {
+            let task = viewModel.createTask(textView.text)
+            if shouldRemindSwitch.isOn {
+                task.notificationDate = dueDate
+            }
+            viewModel.addTask(task)
+            viewModel.services.sceneCoordinator.pop()
+        }
+    }
+    
+    func switchTap(isOn: Bool) {
+        if isOn {
+            viewModel.services.notification.allowNotification()
+            remindContainer.snp.updateConstraints({ (update) in
+                update.height.equalTo(75)
+            })
+        } else {
+            remindContainer.snp.updateConstraints({ (update) in
+                update.height.equalTo(40)
+            })
+        }
     }
     
     func updateDueDateLabel() {

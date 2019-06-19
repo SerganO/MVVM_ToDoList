@@ -14,13 +14,13 @@ typealias Section = SectionModel<String, TaskModel>
 
 class TasksListViewModel: ViewModel {
     
-    let sections: Variable<[Section]>
+    let sections: BehaviorRelay<[Section]>
     
     var isFirst = true
     
     override init(services: Services) {
         
-        self.sections = Variable<[Section]>([])
+        self.sections = BehaviorRelay<[Section]>(value: [])
         
         super.init(services: services)
         
@@ -61,7 +61,9 @@ class TasksListViewModel: ViewModel {
     func deleteTask(_ task: TaskModel, indexPath: IndexPath) {
         print("Delete")
         services.tasks.deleteTask(task, for: services.user.getUserUUID())
-        sections.value[indexPath.section].items.remove(at: indexPath.row)
+        var value = sections.value
+        value[indexPath.section].items.remove(at: indexPath.row)
+        sections.accept(value)
     }
     
     func selectCell(_ cell: TaskCell, indexPath: IndexPath) {
