@@ -11,6 +11,7 @@ import Foundation
 class LoginViewModel: ViewModel {
     
     func move() {
+        sleep(2)
         
         services.sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: services)), type: .push, animated: true)
     }

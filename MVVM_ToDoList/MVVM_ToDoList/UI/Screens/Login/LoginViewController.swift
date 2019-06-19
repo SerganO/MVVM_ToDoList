@@ -8,11 +8,8 @@
 
 import Foundation
 import FacebookLogin
-import GoogleSignIn
 
-class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate, GIDSignInUIDelegate {
-   
-    
+class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate {
     
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         if viewModel.services.facebookAuth.checkAuthorization() {
@@ -37,7 +34,7 @@ class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate, 
         navigationItem.hidesBackButton = true
         
         configureFacebookButton()
-        configureGoogleSignInButton()
+        
         
     }
     
@@ -48,13 +45,6 @@ class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate, 
         loginButton.center.y += 50
         view.addSubview(loginButton)
         loginButton.delegate = self
-    }
-    
-    fileprivate func configureGoogleSignInButton() {
-        let googleSignInButton = GIDSignInButton()
-        googleSignInButton.frame = CGRect(x: view.frame.width/2-100, y: view.frame.height/2-25, width: 200, height: 50)
-        view.addSubview(googleSignInButton)
-        //GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     

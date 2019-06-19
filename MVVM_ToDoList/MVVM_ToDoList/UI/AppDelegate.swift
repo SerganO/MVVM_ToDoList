@@ -11,32 +11,17 @@ import Firebase
 import IQKeyboardManagerSwift
 import UserNotifications
 import FBSDKCoreKit
-import GoogleSignIn
-import RxSwift
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate{
+
     var window: UIWindow?
     var services: Services!
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if error != nil {
-            return
-        }
-        
-        services.user.userIds.googleID = user.userID
-        services.database.getUserUUID(userID: services.user.userIds.googleID, type: .google, completion: {
-            (_) in
-            self.services.sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: self.services)), type: .push, animated: true)
-        }).bind(to: services.user.userUuid).disposed(by: DisposeBag())
-    }
-    
+  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
         IQKeyboardManager.shared.enable = true
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -58,14 +43,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        let googleAuthentication = GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        //let googleAuthentication = GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
         
         let appId: String = FBSDKSettings.appID()
         if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host ==  "authorize" {
             return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
         }
         
-        return googleAuthentication
+        
+        return false
+        //return googleAuthentication
     }
     
     

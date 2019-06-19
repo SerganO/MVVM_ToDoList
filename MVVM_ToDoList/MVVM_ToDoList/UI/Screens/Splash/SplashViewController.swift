@@ -8,8 +8,8 @@
 
 import UIKit
 import SnapKit
-import GoogleSignIn
-class SplashViewController: ViewController<SplashViewModel> , GIDSignInUIDelegate{
+
+class SplashViewController: ViewController<SplashViewModel> {
     let Label = UILabel()
     
     
@@ -30,7 +30,6 @@ class SplashViewController: ViewController<SplashViewModel> , GIDSignInUIDelegat
         ai.center = view.center
         ai.center.y = ai.center.y + 45
         view.addSubview(ai)
-        GIDSignIn.sharedInstance()?.uiDelegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,9 +37,7 @@ class SplashViewController: ViewController<SplashViewModel> , GIDSignInUIDelegat
         guard !viewModel.viewDidAppearCalled else {
             return
         }
-        if viewModel.services.facebookAuth.checkAuthorization() || viewModel.services.googleAuth.checkAuthorization(),
-            viewModel.services.user.getUserUUID() != "" {
-            
+        if viewModel.services.facebookAuth.checkAuthorization() {
             viewModel.moveToTask()
         } else {
             viewModel.moveToLogin()

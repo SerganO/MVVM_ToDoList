@@ -13,12 +13,11 @@ import RxCocoa
 import RxDataSources
 import FacebookLogin
 import FBSDKLoginKit
-import GoogleSignIn
 
 
 
 
-class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDelegate, UITableViewDataSource, GIDSignInUIDelegate {
+class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDelegate, UITableViewDataSource {
     
     let tableView = UITableView(frame: .zero, style: .grouped)
     var addButton = UIBarButtonItem()
@@ -70,7 +69,6 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             UserDefaults.standard.removePersistentDomain(forName: domain)
             UserDefaults.standard.synchronize()
             
-            GIDSignIn.sharedInstance().signOut()
             
             self.viewModel.services.notification.removeAllNotification()
             self.viewModel.services.sceneCoordinator.pop()

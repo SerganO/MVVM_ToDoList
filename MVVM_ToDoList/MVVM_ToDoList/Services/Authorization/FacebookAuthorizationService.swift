@@ -10,7 +10,6 @@ import Foundation
 import FBSDKCoreKit
 
 class FacebookAuthorizationService: AuthorizationService {
-    
     var userID: String = ""
     
     func checkAuthorization() -> Bool {
