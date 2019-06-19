@@ -2,35 +2,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>659152519471-60uduifp6j1d59t32uqu9v7t3ims4alf.apps.googleusercontent.com</string>
+	<string>591743515340-2v7q1u10ms5ltbpb708le9npscbmrm5u.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.659152519471-60uduifp6j1d59t32uqu9v7t3ims4alf</string>
+	<string>com.googleusercontent.apps.591743515340-2v7q1u10ms5ltbpb708le9npscbmrm5u</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA6CuMOH5sGS7IsusuFZFzMgtGf4HdFNuQ</string>
+	<string>AIzaSyBfIFN98YBFQ1n_8-sGdIDl4bhnEnbY7qw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>659152519471</string>
+	<string>591743515340</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>dev.MVVM-ToDoList</string>
+	<string>rw.firebase.gettingstarted</string>
 	<key>PROJECT_ID</key>
-	<string>mvvmtodolist-da34c</string>
+	<string>todolist-faeee</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mvvmtodolist-da34c.appspot.com</string>
+	<string>todolist-faeee.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:659152519471:ios:93cf3251eab080a5</string>
+	<string>1:591743515340:ios:11bd119eb6688866</string>
 	<key>DATABASE_URL</key>
-	<string>https://mvvmtodolist-da34c.firebaseio.com</string>
+	<string>https://todolist-faeee.firebaseio.com</string>
 </dict>
 </plist>

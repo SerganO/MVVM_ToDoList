@@ -51,6 +51,7 @@
 		ECB16CCD22B129BE00A9D12A /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CCC22B129BE00A9D12A /* SceneCoordinator.swift */; };
 		ECB16CCF22B12A9600A9D12A /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CCE22B12A9600A9D12A /* SceneCoordinatorType.swift */; };
 		ECB16CD122B12B2000A9D12A /* SceneTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB16CD022B12B2000A9D12A /* SceneTransitionType.swift */; };
+		ECC46DEB22BA4BEA00D9737A /* GoogleAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC46DEA22BA4BEA00D9737A /* GoogleAuthorizationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 		ECB16CCC22B129BE00A9D12A /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		ECB16CCE22B12A9600A9D12A /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		ECB16CD022B12B2000A9D12A /* SceneTransitionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneTransitionType.swift; sourceTree = "<group>"; };
+		ECC46DEA22BA4BEA00D9737A /* GoogleAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthorizationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,7 @@
 			children = (
 				EC68EEA222B8EA7100DD0FAC /* AuthorizationService.swift */,
 				EC68EEA422B8EBAC00DD0FAC /* FacebookAuthorizationService.swift */,
+				ECC46DEA22BA4BEA00D9737A /* GoogleAuthorizationService.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				ECB16CD122B12B2000A9D12A /* SceneTransitionType.swift in Sources */,
 				ECB16CC622B1210B00A9D12A /* SplashViewController.swift in Sources */,
 				ECB16CC222B11B5700A9D12A /* TasksListViewController.swift in Sources */,
+				ECC46DEB22BA4BEA00D9737A /* GoogleAuthorizationService.swift in Sources */,
 				ECB16CC922B1254500A9D12A /* SceneType.swift in Sources */,
 				ECB16CB222B110E900A9D12A /* TasksListViewModel.swift in Sources */,
 				ECB16CCF22B12A9600A9D12A /* SceneCoordinatorType.swift in Sources */,

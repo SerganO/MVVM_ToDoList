@@ -8,18 +8,31 @@
 
 import Foundation
 import FacebookLogin
+import GoogleSignIn
 
-class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate {
+class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate, GIDSignInUIDelegate /*, GIDSignInDelegate*/ {
     
-    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
-        if viewModel.services.facebookAuth.checkAuthorization() {
-            viewModel.services.user.userIds.facebookID = viewModel.services.facebookAuth.userID
-            viewModel.services.database.getUserUUID(userID: viewModel.services.user.userIds.facebookID, type: .facebook, completion: {
+    /*func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if error == nil {
+            viewModel.services.user.userIds.googleID = user.userID
+            viewModel.services.database.getUserUUID(userID: self.viewModel.services.user.userIds.googleID, type: .google, completion: {
                 (_) in
                 self.viewModel.move()
-            }).bind(to: viewModel.services.user.userUuid).disposed(by: disposeBag)
-            
+            }).bind(to: self.viewModel.services.user.userUuid).disposed(by: self.disposeBag)
         }
+    }*/
+    
+    func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
+        viewModel.services.facebookAuth.checkAuthorization({
+            result in
+            if result {
+                self.viewModel.services.user.userIds.facebookID = self.viewModel.services.facebookAuth.userID
+                self.viewModel.services.database.getUserUUID(userID: self.viewModel.services.user.userIds.facebookID, type: .facebook, completion: {
+                    (_) in
+                    self.viewModel.move()
+                }).bind(to: self.viewModel.services.user.userUuid).disposed(by: self.disposeBag)
+            }
+        })
     }
     
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
@@ -33,8 +46,18 @@ class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate {
         
         navigationItem.hidesBackButton = true
         
-        configureFacebookButton()
         
+        configureFacebookButton()
+        configureGoogleSignInButton()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewModel.services.user.navigationCompletion = {
+            (result) in
+            self.viewModel.move()
+        }
         
     }
     
@@ -45,6 +68,14 @@ class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate {
         loginButton.center.y += 50
         view.addSubview(loginButton)
         loginButton.delegate = self
+    }
+    
+    func configureGoogleSignInButton() {
+        let googleSignInButton = GIDSignInButton()
+        googleSignInButton.frame = CGRect(x: view.frame.width/2-100, y: view.frame.height/2-25, width: 200, height: 50)
+        view.addSubview(googleSignInButton)
+        GIDSignIn.sharedInstance().uiDelegate = self
+        /*GIDSignIn.sharedInstance().delegate = self*/
     }
     
     
