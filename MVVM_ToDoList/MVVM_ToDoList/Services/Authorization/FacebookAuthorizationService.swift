@@ -12,12 +12,14 @@ import FBSDKCoreKit
 class FacebookAuthorizationService: AuthorizationService {
     var userID: String = ""
     
-    func checkAuthorization() -> Bool {
+    func checkAuthorization(_ completion : @escaping (Bool)-> Void){
         if let accessToken = FBSDKAccessToken.current(), FBSDKAccessToken.currentAccessTokenIsActive() {
             userID = accessToken.userID
-            return true
+            completion(true)
+        } else {
+            completion(false)
         }
-        return false
+       
     }
     
     
