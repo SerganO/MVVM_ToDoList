@@ -11,17 +11,25 @@ import Firebase
 import IQKeyboardManagerSwift
 import UserNotifications
 import FBSDKCoreKit
-
+import GoogleSignIn
+import RxSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate{
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    
 
     var window: UIWindow?
     var services: Services!
+    
+   
   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
+        
         IQKeyboardManager.shared.enable = true
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -43,16 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        //let googleAuthentication = GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        let googleAuthentication = GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
         
         let appId: String = FBSDKSettings.appID()
         if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host ==  "authorize" {
             return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
         }
         
-        
-        return false
-        //return googleAuthentication
+        return googleAuthentication
     }
     
     

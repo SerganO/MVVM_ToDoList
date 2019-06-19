@@ -13,7 +13,7 @@ protocol UserService {
     var userIds: userIDs { get set }
     var userUuid:Variable<String> { get set }
     func getUserUUID() -> String
-    
+    var navigationCompletion: ((Bool) -> Void)? { get set }
    // func login( for userID: String, type: userIDType, completion : @escaping (Bool)-> Void) -> Observable<String>
     
 }
