@@ -34,15 +34,19 @@ class SplashViewController: ViewController<SplashViewModel> {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard !viewModel.viewDidAppearCalled else {
-            return
-        }
-        if viewModel.services.facebookAuth.checkAuthorization() {
-            viewModel.moveToTask()
-        } else {
-            viewModel.moveToLogin()
-        }
-        viewModel.viewDidAppearCalled = true
+       
+        viewModel.services.facebookAuth.checkAuthorization({result  in
+            guard !self.viewModel.viewDidAppearCalled else {
+                return
+            }
+            if result {
+                self.viewModel.moveToTask()
+            } else {
+                self.viewModel.moveToLogin()
+            }
+            self.viewModel.viewDidAppearCalled = true
+        })
+        
     }
     
 }

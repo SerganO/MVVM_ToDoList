@@ -12,14 +12,19 @@ import FacebookLogin
 class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate {
     
     func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
-        if viewModel.services.facebookAuth.checkAuthorization() {
-            viewModel.services.user.userIds.facebookID = viewModel.services.facebookAuth.userID
-            viewModel.services.database.getUserUUID(userID: viewModel.services.user.userIds.facebookID, type: .facebook, completion: {
-                (_) in
-                self.viewModel.move()
-            }).bind(to: viewModel.services.user.userUuid).disposed(by: disposeBag)
+        viewModel.services.facebookAuth.checkAuthorization({
+            result in
+            if result {
+                self.viewModel.services.user.userIds.facebookID = self.viewModel.services.facebookAuth.userID
+                self.viewModel.services.database.getUserUUID(userID: self.viewModel.services.user.userIds.facebookID, type: .facebook, completion: {
+                    (_) in
+                    self.viewModel.move()
+                }).bind(to: self.viewModel.services.user.userUuid).disposed(by: self.disposeBag)
+            }
+        })
             
-        }
+            
+        
     }
     
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
