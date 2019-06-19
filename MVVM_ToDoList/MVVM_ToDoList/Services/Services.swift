@@ -15,8 +15,7 @@ class Services {
     let date: DateService
     let notification: NotificationService
     var facebookAuth: AuthorizationService
-    var googleAuth: AuthorizationService
-    var user: UserService
+    let user: UserService
     
     public init(sceneCoordinator: SceneCoordinator) {
         self.sceneCoordinator = sceneCoordinator
@@ -25,7 +24,6 @@ class Services {
         date = SimpleDateService()
         notification = SimpleNotificationService()
         facebookAuth = FacebookAuthorizationService()
-        googleAuth = GoogleAuthorizationService()
         user = SimpleUserService(database: database)
     }
 }

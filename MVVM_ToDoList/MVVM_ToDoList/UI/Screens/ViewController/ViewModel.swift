@@ -16,5 +16,4 @@ class ViewModel {
     init(services: Services) {
         self.services = services
     }
-    
 }

@@ -8,11 +8,12 @@
 
 import UIKit
 import SnapKit
-import GoogleSignIn
 
-class SplashViewController: ViewController<SplashViewModel>, GIDSignInUIDelegate {
+class SplashViewController: ViewController<SplashViewModel> {
     let Label = UILabel()
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -29,48 +30,19 @@ class SplashViewController: ViewController<SplashViewModel>, GIDSignInUIDelegate
         ai.center = view.center
         ai.center.y = ai.center.y + 45
         view.addSubview(ai)
-        
-       
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-       
-        viewModel.services.user.navigationCompletion = {
-            (result) in
-            if result {
-                self.viewModel.moveToTask()
-            } else {
-                self.viewModel.moveToLogin()
-            }
+        guard !viewModel.viewDidAppearCalled else {
+            return
         }
-        
-        viewModel.services.facebookAuth.checkAuthorization({result  in
-            guard !self.viewModel.viewDidAppearCalled else {
-                return
-            }
-            if result {
-                self.viewModel.services.user.userIds.facebookID = self.viewModel.services.facebookAuth.userID
-                self.viewModel.moveToTask()
-            } else {
-                self.checkGoogleAuth()
-            }
-            self.viewModel.viewDidAppearCalled = true
-        })
-        
-    }
-    
-    func checkGoogleAuth() {
-        GIDSignIn.sharedInstance()?.uiDelegate = self
-        GIDSignIn.sharedInstance()?.delegate = self
-        viewModel.services.googleAuth.checkAuthorization { (result) in
-            if result {
-                self.viewModel.moveToTask()
-            } else {
-                self.viewModel.moveToLogin()
-            }
+        if viewModel.services.facebookAuth.checkAuthorization() {
+            viewModel.moveToTask()
+        } else {
+            viewModel.moveToLogin()
         }
+        viewModel.viewDidAppearCalled = true
     }
     
 }

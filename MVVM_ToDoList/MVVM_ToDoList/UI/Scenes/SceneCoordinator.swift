@@ -26,12 +26,7 @@ class SceneCoordinator: SceneCoordinatorType {
             current = navigationController.topViewController
         }
         
-        /*if let presented = current?.presentedViewController, !(presented is UISearchController) {
-            current = presented
-        }*/
-        
-        if let presented = current?.presentedViewController,
-            presented is ViewController {
+        if let presented = current?.presentedViewController, !(presented is UISearchController) {
             current = presented
         }
         

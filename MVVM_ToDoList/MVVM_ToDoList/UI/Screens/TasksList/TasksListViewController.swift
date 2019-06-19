@@ -13,7 +13,7 @@ import RxCocoa
 import RxDataSources
 import FacebookLogin
 import FBSDKLoginKit
-import GoogleSignIn
+
 
 
 
@@ -68,8 +68,6 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             let domain = Bundle.main.bundleIdentifier!
             UserDefaults.standard.removePersistentDomain(forName: domain)
             UserDefaults.standard.synchronize()
-            
-            GIDSignIn.sharedInstance()?.signOut()
             
             
             self.viewModel.services.notification.removeAllNotification()
