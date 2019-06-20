@@ -37,6 +37,7 @@ class AddTaskViewModel: ViewModel {
         formatter.dateFormat = "dd-MM-yyyy HH-mm-ss"
         services.tasks.editTask(task, editItems: [
             ["text": task.text],
+            ["orderID": -1],
             ["createDate": formatter.string(from: Date())]
             ], for: services.user.user.getUserUUID())
         if let notDate = task.notificationDate {

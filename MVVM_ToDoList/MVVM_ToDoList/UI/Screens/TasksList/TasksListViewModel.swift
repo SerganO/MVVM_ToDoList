@@ -64,11 +64,13 @@ class TasksListViewModel: ViewModel {
     func addTask() {
         print("ADD")
         services.sceneCoordinator.transition(to: Scene.addTask(AddTaskViewModel(services: services)), type: .push, animated: true)
+        services.user.completionHandler = {(_) in self.updateId()}
     }
     
     func editTask(_ task : TaskModel) {
         print("Edit")
         services.sceneCoordinator.transition(to: Scene.addTask(AddTaskViewModel(services: services, taskForEdit: task)), type: .push, animated: true)
+        services.user.completionHandler = {(_) in self.updateId()}
     }
     
     func deleteTask(_ task: TaskModel, indexPath: IndexPath) {

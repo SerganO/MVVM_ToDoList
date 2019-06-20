@@ -165,6 +165,7 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
         }
         
         if let editItem = viewModel.taskForEdit {
+            editItem.orderID = -1
             editItem.text = textView.text
             if shouldRemindSwitch.isOn {
                 editItem.notificationDate = dueDate
@@ -172,13 +173,16 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
                 editItem.notificationDate = nil
             }
             viewModel.editTask(editItem)
+            viewModel.services.user.completionHandler?(true)
             viewModel.services.sceneCoordinator.pop()
         } else {
             let task = viewModel.createTask(textView.text)
             if shouldRemindSwitch.isOn {
                 task.notificationDate = dueDate
             }
+            task.orderID = -1
             viewModel.addTask(task)
+            viewModel.services.user.completionHandler?(true)
             viewModel.services.sceneCoordinator.pop()
         }
     }
