@@ -89,6 +89,7 @@ class TasksListViewModel: ViewModel {
         sections.accept(value)
         task.completed = !task.completed
         task.createDate = Date()
+        services.notification.addNotification(for: task)
         TasksListViewModel.configureTaskCell(task, cell: cell)
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
