@@ -26,12 +26,6 @@ class TasksListViewModel: ViewModel {
         
         services.tasks.tasks(for: services.user.user.getUserUUID()).bind(to: sections).disposed(by: disposeBag)
         
-//        services.tasks.tasks(for: services.user.user.getUserUUID()).subscribe{ (event) in
-//                if event.element != nil {
-//                    self.updateId()
-//                }
-//            }.disposed(by: disposeBag)
-        
         services.tasks.tasks(for: services.user.user.getUserUUID()).subscribe { (tasks) in
             
             if let task = tasks.element {
@@ -82,6 +76,7 @@ class TasksListViewModel: ViewModel {
     }
     
     func selectCell(_ cell: TaskCell, indexPath: IndexPath) {
+        updateId()
         let task = sections.value[indexPath.section].items[indexPath.row]
         task.orderID = -1
         var value = sections.value

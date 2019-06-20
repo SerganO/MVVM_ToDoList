@@ -173,7 +173,7 @@ class AddTaskViewController: ViewController<AddTaskViewModel> {
                 editItem.notificationDate = nil
             }
             viewModel.editTask(editItem)
-            viewModel.services.user.completionHandler?(true)
+            //viewModel.services.user.completionHandler?(true)
             viewModel.services.sceneCoordinator.pop()
         } else {
             let task = viewModel.createTask(textView.text)

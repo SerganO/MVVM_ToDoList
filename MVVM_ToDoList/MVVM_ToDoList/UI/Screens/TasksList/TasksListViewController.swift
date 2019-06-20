@@ -112,9 +112,7 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         
     }
     func reorderButtonTap() {
-        if tableView.isEditing {
-            viewModel.updateId()
-        }
+        viewModel.updateId()
         tableView.isEditing = !tableView.isEditing
     }
     
@@ -122,6 +120,7 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     
     
     func addButtonTap() {
+        viewModel.updateId()
         viewModel.addTask()
         tableView.reloadData()
     }
@@ -277,13 +276,13 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?  {
         let editAction = UITableViewRowAction(style: .normal, title: "Edit" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
-           
+            self.viewModel.updateId()
             let task = self.viewModel.sections.value[indexPath.section].items[indexPath.row]
             self.viewModel.editTask(task)
             
         })
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath:IndexPath) -> Void in
-       
+            self.viewModel.updateId()
             let task = self.viewModel.sections.value[indexPath.section].items[indexPath.row]
             self.viewModel.deleteTask(task,indexPath: indexPath )
             
