@@ -282,7 +282,6 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             
         })
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath:IndexPath) -> Void in
-            self.viewModel.updateId()
             let task = self.viewModel.sections.value[indexPath.section].items[indexPath.row]
             self.viewModel.deleteTask(task,indexPath: indexPath )
             
