@@ -8,6 +8,8 @@
 
 import Foundation
 
+let types: [userIDType] = [.facebook, .google]
+
 enum userIDType {
     case facebook
     case google
@@ -26,4 +28,6 @@ extension userIDType {
         }
         
     }
+    
+   
 }

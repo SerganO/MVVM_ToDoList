@@ -11,21 +11,27 @@ import RxSwift
 import RxCocoa
 
 class SimpleUserService: UserService {
-    var completionHandler: ((Bool) -> Void)?
- 
-    var userIds = userIDs()
+    func getUserUUID(userID: String, type: userIDType, completion: @escaping (Bool) -> Void) -> Observable<String> {
+        return database.getUserUUID(userID: userID, type: type, completion: completion)
+    }
     
-    var userUuid:BehaviorRelay<String> = BehaviorRelay<String>(value: "")
+    func syncUserID(newUserID: String, newType: userIDType, with uuid: String, completion: @escaping (Bool) -> Void) {
+        database.syncUserID(newUserID: newUserID, newType: newType, with: uuid, completion: completion)
+    }
+    
+    func getSync(for uuid: String, completion: @escaping (Bool) -> Void) {
+        database.getSync(for: uuid, completion: completion)
+    }
+    
+    var user: User = User()
+    
+    var completionHandler: ((Bool) -> Void)?
     
     
     let database: DatabaseService
     
     init(database: DatabaseService) {
         self.database = database
-    }
-    
-    func getUserUUID() -> String {
-        return userUuid.value
     }
     
     

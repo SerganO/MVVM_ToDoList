@@ -27,7 +27,7 @@ class AddTaskViewModel: ViewModel {
     }
     
     func addTask(_ task: TaskModel) {
-        services.tasks.addTask(task, for: services.user.getUserUUID())
+        services.tasks.addTask(task, for: services.user.user.getUserUUID())
     }
     
     func editTask(_ task:TaskModel) {
@@ -38,15 +38,15 @@ class AddTaskViewModel: ViewModel {
         services.tasks.editTask(task, editItems: [
             ["text": task.text],
             ["createDate": formatter.string(from: Date())]
-            ], for: services.user.getUserUUID())
+            ], for: services.user.user.getUserUUID())
         if let notDate = task.notificationDate {
             services.tasks.editTask(task, editItems: [
                 ["notificationDate": formatter.string(from: notDate)]
-                ], for: services.user.getUserUUID())
+                ], for: services.user.user.getUserUUID())
         } else {
             services.tasks.editTask(task, editItems: [
                 ["notificationDate": ""]
-                ], for: services.user.getUserUUID())
+                ], for: services.user.user.getUserUUID())
         }
         
     }

@@ -17,5 +17,6 @@ protocol DatabaseService {
     
     func getUserUUID(userID: String, type: userIDType, completion : @escaping (Bool)-> Void) -> Observable<String>
     func syncUserID(newUserID: String, newType: userIDType, with uuid: String, completion : @escaping (Bool)-> Void)
+    func getSync(for uuid:String, completion : @escaping (Bool)-> Void) 
     
 }

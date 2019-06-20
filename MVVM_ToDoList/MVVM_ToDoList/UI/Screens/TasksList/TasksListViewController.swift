@@ -49,7 +49,17 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         navigationItem.rightBarButtonItem = addButton
         
         let sync = UIButton()
-        sync.setTitle("$", for: .normal)
+ 
+        if viewModel.services.user.user.sync {
+            sync.setImage(UIImage(named:"AllDone"), for: .normal)
+        } else if viewModel.services.user.user.IDs.facebookID == "" {
+            sync.setImage(UIImage(named:"Facebook"), for: .normal)
+        } else {
+            sync.setImage(UIImage(named:"GoogleIcon"), for: .normal)
+        }
+        
+        
+        
         sync.setTitleColor(.black, for: .normal)
         sync.setTitleColor(.gray, for: .highlighted)
         sync.rx.tap.bind {
@@ -89,7 +99,7 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     }
     
     func syncButtonTap() {
-       
+        guard !viewModel.services.user.user.sync else { return }
         
         if viewModel.services.facebookAuth.userID == "" {
             let loginManager = LoginManager()
@@ -97,9 +107,14 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             loginManager.logIn(readPermissions: [ .publicProfile, .email ], viewController: nil, completion: { (LoginResult) in
                 if let accessToken = FBSDKAccessToken.current(), FBSDKAccessToken.currentAccessTokenIsActive() {
                     self.viewModel.services.facebookAuth.userID = accessToken.userID
-                    self.viewModel.services.database.syncUserID(newUserID: accessToken.userID, newType: .facebook, with: self.viewModel.services.user.userUuid.value, completion: { (result) in
+                    self.viewModel.services.user.syncUserID(newUserID: accessToken.userID, newType: .facebook, with: self.viewModel.services.user.user.getUserUUID(), completion: { (result) in
                         if result {
-                            self.syncButton.title = "SYNC"
+                            self.viewModel.services.user.getSync(for: self.viewModel.services.user.user.getUserUUID(), completion: { (result) in
+                                self.viewModel.services.user.user.sync = result
+                                if let button = self.syncButton.customView as? UIButton {
+                                    button.setImage(UIImage(named:"AllDone"), for: .normal)
+                                }
+                            })
                         }
                     })
                 }
@@ -109,9 +124,14 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             viewModel.services.user.completionHandler = {
                 (result) in
                 if result {
-                    self.viewModel.services.database.syncUserID(newUserID: self.viewModel.services.googleAuth.userID, newType: .google, with: self.viewModel.services.user.userUuid.value, completion: { (result) in
+                    self.viewModel.services.database.syncUserID(newUserID: self.viewModel.services.googleAuth.userID, newType: .google, with: self.viewModel.services.user.user.getUserUUID(), completion: { (result) in
                         if result {
-                            self.syncButton.title = "SYNC"
+                            self.viewModel.services.user.getSync(for: self.viewModel.services.user.user.getUserUUID(), completion: { (result) in
+                                self.viewModel.services.user.user.sync = result
+                                if let button = self.syncButton.customView as? UIButton {
+                                    button.setImage(UIImage(named:"AllDone"), for: .normal)
+                                }
+                            })
                         }
                     })
                 }

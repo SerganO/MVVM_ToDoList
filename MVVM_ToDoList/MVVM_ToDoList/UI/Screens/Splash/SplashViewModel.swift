@@ -18,19 +18,26 @@ class SplashViewModel: ViewModel {
     }
     
     func moveToTask() {
-        if services.user.userIds.facebookID != "" {
-            services.user.userIds.facebookID = services.facebookAuth.userID
-            services.database.getUserUUID(userID: services.user.userIds.facebookID, type: .facebook, completion: {
+        if services.user.user.IDs.facebookID != "" {
+            services.user.user.IDs.facebookID = services.facebookAuth.userID
+            services.user.getUserUUID(userID: services.user.user.IDs.facebookID, type: .facebook, completion: {
                 (_) in
-                self.services.sceneCoordinator.transition(to: Scene.login(LoginViewModel(services: self.services)), type: .push, animated: true)
-                self.services.sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: self.services)), type: .push, animated: true)
-            }).bind(to: services.user.userUuid).disposed(by: disposeBag)
-        } else if services.user.userIds.googleID != "" {
-            services.database.getUserUUID(userID: self.services.user.userIds.googleID, type: .google, completion: {
+                self.services.user.getSync(for: self.services.user.user.getUserUUID(), completion: { (result) in
+                    self.services.user.user.sync = result
+                    self.services.sceneCoordinator.transition(to: Scene.login(LoginViewModel(services: self.services)), type: .push, animated: true)
+                    self.services.sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: self.services)), type: .push, animated: true)
+                })
+                
+            }).bind(to: services.user.user.uuid).disposed(by: disposeBag)
+        } else if services.user.user.IDs.googleID != "" {
+            services.user.getUserUUID(userID: self.services.user.user.IDs.googleID, type: .google, completion: {
                 (_) in
-                self.services.sceneCoordinator.transition(to: Scene.login(LoginViewModel(services: self.services)), type: .push, animated: true)
-                self.services.sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: self.services)), type: .push, animated: true)
-            }).bind(to: self.services.user.userUuid).disposed(by: self.disposeBag)
+                self.services.user.getSync(for: self.services.user.user.getUserUUID(), completion: { (result) in
+                    self.services.user.user.sync = result
+                    self.services.sceneCoordinator.transition(to: Scene.login(LoginViewModel(services: self.services)), type: .push, animated: true)
+                    self.services.sceneCoordinator.transition(to: Scene.tasksList(TasksListViewModel(services: self.services)), type: .push, animated: true)
+                })
+            }).bind(to: self.services.user.user.uuid).disposed(by: self.disposeBag)
         }
     }
     

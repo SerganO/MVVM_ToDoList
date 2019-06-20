@@ -51,7 +51,7 @@ class SplashViewController: ViewController<SplashViewModel>, GIDSignInUIDelegate
                 return
             }
             if result {
-                self.viewModel.services.user.userIds.facebookID = self.viewModel.services.facebookAuth.userID
+                self.viewModel.services.user.user.IDs.facebookID = self.viewModel.services.facebookAuth.userID
                 self.viewModel.moveToTask()
             } else {
                 self.checkGoogleAuth()

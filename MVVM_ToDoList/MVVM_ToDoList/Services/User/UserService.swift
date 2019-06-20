@@ -11,10 +11,11 @@ import RxSwift
 import RxCocoa
 
 protocol UserService {
-    var userIds: userIDs { get set }
-    var userUuid:BehaviorRelay<String> { get set }
-    func getUserUUID() -> String
-    var completionHandler: ((Bool) -> Void)? { get set }
-   // func login( for userID: String, type: userIDType, completion : @escaping (Bool)-> Void) -> Observable<String>
     
+    var user: User {get set}
+    var completionHandler: ((Bool) -> Void)? { get set }
+    
+    func getUserUUID(userID: String, type: userIDType, completion : @escaping (Bool)-> Void) -> Observable<String>
+    func syncUserID(newUserID: String, newType: userIDType, with uuid: String, completion : @escaping (Bool)-> Void)
+    func getSync(for uuid:String, completion : @escaping (Bool)-> Void) 
 }

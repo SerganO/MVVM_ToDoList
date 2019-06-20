@@ -12,9 +12,20 @@ import RxSwift
 
 
 class FirebaseDatabaseService: DatabaseService {
+    
     let MainRef = Database.database().reference()
     
-    
+    func getSync(for uuid: String, completion: @escaping (Bool) -> Void) {
+        self.MainRef.child("users").child(uuid).child("sync").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            
+            if snapshot.exists() {
+                completion(snapshot.value as! Bool)
+            } else {
+                completion(false)
+            }
+        })
+    }
     
     func syncUserID(newUserID: String, newType: userIDType, with uuid: String, completion: @escaping (Bool) -> Void) {
         self.MainRef.child("Identifier").child(newType.getTypeString()).child(newUserID).setValue(uuid)
@@ -35,10 +46,13 @@ class FirebaseDatabaseService: DatabaseService {
                     observer.onNext(snapshot.value as! String)
                     completion(true)
                 }
-                else{
+                else {
                     let uuid = UUID().uuidString
                     self.MainRef.child("Identifier").child(type.getTypeString()).child(userID).setValue(uuid)
                     self.MainRef.child("users").child(uuid).child("sync").setValue(false)
+//                    let idRef = self.MainRef.child("users").child(uuid).child("IDs")
+//                    idRef.child(type.getTypeString()).setValue(userID)
+                    
                     observer.onNext(uuid)
                     completion(true)
                 }

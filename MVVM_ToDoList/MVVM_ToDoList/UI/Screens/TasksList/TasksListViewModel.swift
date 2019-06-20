@@ -24,10 +24,10 @@ class TasksListViewModel: ViewModel {
         
         super.init(services: services)
         
-        services.tasks.tasks(for: services.user.getUserUUID()).bind(to: sections).disposed(by: disposeBag)
+        services.tasks.tasks(for: services.user.user.getUserUUID()).bind(to: sections).disposed(by: disposeBag)
         
         
-        services.tasks.tasks(for: services.user.getUserUUID()).subscribe { (tasks) in
+        services.tasks.tasks(for: services.user.user.getUserUUID()).subscribe { (tasks) in
             
             if let task = tasks.element {
                 services.notification.syncNotification(for: task[0].items)
@@ -60,7 +60,7 @@ class TasksListViewModel: ViewModel {
     
     func deleteTask(_ task: TaskModel, indexPath: IndexPath) {
         print("Delete")
-        services.tasks.deleteTask(task, for: services.user.getUserUUID())
+        services.tasks.deleteTask(task, for: services.user.user.getUserUUID())
         var value = sections.value
         value[indexPath.section].items.remove(at: indexPath.row)
         sections.accept(value)
@@ -75,7 +75,7 @@ class TasksListViewModel: ViewModel {
         formatter.dateStyle = .medium
         formatter.timeStyle = .medium
         formatter.dateFormat = "dd-MM-yyyy HH-mm-ss"
-        services.tasks.editTask(task, editItems: [["completed":task.completed ? 1 : 0],["createDate":formatter.string(from: Date())]], for: services.user.getUserUUID())
+        services.tasks.editTask(task, editItems: [["completed":task.completed ? 1 : 0],["createDate":formatter.string(from: Date())]], for: services.user.user.getUserUUID())
     }
     
     

@@ -16,6 +16,7 @@
 		EC1A1ED822AFE2A100E428F6 /* MVVM_ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1ED722AFE2A100E428F6 /* MVVM_ToDoListTests.swift */; };
 		EC1A1EE322AFE2A100E428F6 /* MVVM_ToDoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EE222AFE2A100E428F6 /* MVVM_ToDoListUITests.swift */; };
 		EC1A1EF622AFEADD00E428F6 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */; };
+		EC30EF4A22BB76C500FE138C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC30EF4922BB76C500FE138C /* User.swift */; };
 		EC68EE9E22B8D55300DD0FAC /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EE9D22B8D55300DD0FAC /* NotificationService.swift */; };
 		EC68EEA022B8D56B00DD0FAC /* SimpleNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EE9F22B8D56B00DD0FAC /* SimpleNotificationService.swift */; };
 		EC68EEA322B8EA7100DD0FAC /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC68EEA222B8EA7100DD0FAC /* AuthorizationService.swift */; };
@@ -89,6 +90,7 @@
 		EC1A1EE222AFE2A100E428F6 /* MVVM_ToDoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVM_ToDoListUITests.swift; sourceTree = "<group>"; };
 		EC1A1EE422AFE2A100E428F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		EC30EF4922BB76C500FE138C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EC68EE9D22B8D55300DD0FAC /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		EC68EE9F22B8D56B00DD0FAC /* SimpleNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNotificationService.swift; sourceTree = "<group>"; };
 		EC68EEA222B8EA7100DD0FAC /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				EC1A1EF522AFEADD00E428F6 /* TaskModel.swift */,
 				EC68EEAB22B8F21200DD0FAC /* userIDs.swift */,
 				EC68EEB222B8FE2E00DD0FAC /* userIDType.swift */,
+				EC30EF4922BB76C500FE138C /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -688,6 +691,7 @@
 				ECB16CCD22B129BE00A9D12A /* SceneCoordinator.swift in Sources */,
 				EC68EEAF22B8F27100DD0FAC /* UserService.swift in Sources */,
 				EC68EE9E22B8D55300DD0FAC /* NotificationService.swift in Sources */,
+				EC30EF4A22BB76C500FE138C /* User.swift in Sources */,
 				EC8AD9D222B7949A00120EF5 /* SimpleTasksService.swift in Sources */,
 				ECB16CAD22B10DDA00A9D12A /* NavigationViewModel.swift in Sources */,
 				ECB0E22B22B2500B0002B3B4 /* FirebaseDatabaseService.swift in Sources */,
