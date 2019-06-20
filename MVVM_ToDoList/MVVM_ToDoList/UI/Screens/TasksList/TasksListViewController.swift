@@ -23,6 +23,7 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     var addButton = UIBarButtonItem()
     var syncButton = UIBarButtonItem()
     var logOutButton = UIBarButtonItem()
+    var reorderButton = UIBarButtonItem()
     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, TaskModel>>(configureCell: { dataSource, tableView, indexPath, item in
                     let cell = tableView.dequeueReusableCell(withIdentifier: TaskCell.Identifier, for: indexPath) as! TaskCell
                     TasksListViewModel.configureTaskCell(item, cell: cell)
@@ -48,25 +49,19 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         addButton = UIBarButtonItem.init(customView: add)
         navigationItem.rightBarButtonItem = addButton
         
-        let sync = UIButton()
- 
-        if viewModel.services.user.user.sync {
-            sync.setImage(UIImage(named:"AllDone"), for: .normal)
-        } else if viewModel.services.user.user.IDs.facebookID == "" {
-            sync.setImage(UIImage(named:"Facebook"), for: .normal)
-        } else {
-            sync.setImage(UIImage(named:"GoogleIcon"), for: .normal)
-        }
+        
+        let reorder = UIButton()
+        reorder.setImage(UIImage(named:"Reorder"), for: .normal)
+        reorder.rx.tap.bind {
+            self.reorderButtonTap()
+        }.disposed(by: viewModel.disposeBag)
+        
+        let reorderButton = UIBarButtonItem(customView: reorder)
+        navigationItem.rightBarButtonItems?.append(reorderButton)
         
         
         
-        sync.setTitleColor(.black, for: .normal)
-        sync.setTitleColor(.gray, for: .highlighted)
-        sync.rx.tap.bind {
-            self.syncButtonTap()
-            }.disposed(by: viewModel.disposeBag)
-        syncButton = UIBarButtonItem.init(customView: sync)
-        navigationItem.rightBarButtonItems?.append(syncButton)
+       
         
         let logOut = UIButton()
         logOut.setTitle("LOG OUT", for: .normal)
@@ -78,12 +73,36 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         logOutButton = UIBarButtonItem.init(customView: logOut)
         navigationItem.leftBarButtonItem = logOutButton
         
+        let sync = UIButton()
+        
+        if viewModel.services.user.user.sync {
+            sync.setImage(UIImage(named:"AllDone"), for: .normal)
+        } else if viewModel.services.user.user.IDs.facebookID == "" {
+            sync.setImage(UIImage(named:"Facebook"), for: .normal)
+        } else {
+            sync.setImage(UIImage(named:"GoogleIcon"), for: .normal)
+        }
+        
+        sync.setTitleColor(.black, for: .normal)
+        sync.setTitleColor(.gray, for: .highlighted)
+        sync.rx.tap.bind {
+            self.syncButtonTap()
+            }.disposed(by: viewModel.disposeBag)
+        syncButton = UIBarButtonItem.init(customView: sync)
+        navigationItem.leftBarButtonItems?.append(syncButton)
+        
         navigationItem.hidesBackButton = true
         
         dataSource.titleForHeaderInSection = { dataSource, index in
             return dataSource.sectionModels[index].model
         }
-        dataSource.canEditRowAtIndexPath = { _, _ in
+        dataSource.canEditRowAtIndexPath = { _, indexPath in
+            let cell = self.tableView.cellForRow(at: indexPath)
+            cell?.showsReorderControl = false
+            return true
+        }
+        
+        dataSource.canMoveRowAtIndexPath = {_,_ in
             return true
         }
         
@@ -92,6 +111,27 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             ).disposed(by: viewModel.disposeBag)
         
     }
+    func reorderButtonTap() {
+        if tableView.isEditing {
+            updateId()
+        }
+        tableView.isEditing = !tableView.isEditing
+    }
+    
+    func updateId() {
+        var i = 0
+        for task in viewModel.sections.value[0].items {
+            viewModel.services.tasks.editTask(task, editItems: [["orderID":i]], for: viewModel.services.user.user.getUserUUID())
+            i = i+1
+        }
+        i = 0
+        for task in viewModel.sections.value[1].items {
+            viewModel.services.tasks.editTask(task, editItems: [["orderID":i]], for: viewModel.services.user.user.getUserUUID())
+            i = i+1
+        }
+        
+    }
+    
     
     func addButtonTap() {
         viewModel.addTask()
@@ -212,6 +252,14 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     }
     
     // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return UITableViewCell.EditingStyle.none
+    }
+    
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
     
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?  {

@@ -70,7 +70,6 @@ class LoginViewController: ViewController<LoginViewModel>, LoginButtonDelegate, 
         googleSignInButton.frame = CGRect(x: view.frame.width/2-100, y: view.frame.height/2-25, width: 200, height: 50)
         view.addSubview(googleSignInButton)
         GIDSignIn.sharedInstance().uiDelegate = self
-        /*GIDSignIn.sharedInstance().delegate = self*/
     }
     
     

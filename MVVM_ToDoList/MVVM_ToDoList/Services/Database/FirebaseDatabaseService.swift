@@ -66,7 +66,7 @@ class FirebaseDatabaseService: DatabaseService {
         
         return Observable.create({ (observer) -> Disposable in
             let UserRef = self.MainRef.child("users").child(userID)
-            UserRef.child("tasks").queryOrdered(byChild: "createDate").observe(.value) { (snapshot) in
+            UserRef.child("tasks").queryOrdered(byChild: "orderID").observe(.value) { (snapshot) in
                 var newTasks = [Section(model: "Uncompleted", items: []), Section(model: "Completed", items: [])]
                 for child in snapshot.children {
                     if let snapshot = child as? DataSnapshot,
