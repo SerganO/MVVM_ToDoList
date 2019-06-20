@@ -113,24 +113,12 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     }
     func reorderButtonTap() {
         if tableView.isEditing {
-            updateId()
+            viewModel.updateId()
         }
         tableView.isEditing = !tableView.isEditing
     }
     
-    func updateId() {
-        var i = 0
-        for task in viewModel.sections.value[0].items {
-            viewModel.services.tasks.editTask(task, editItems: [["orderID":i]], for: viewModel.services.user.user.getUserUUID())
-            i = i+1
-        }
-        i = 0
-        for task in viewModel.sections.value[1].items {
-            viewModel.services.tasks.editTask(task, editItems: [["orderID":i]], for: viewModel.services.user.user.getUserUUID())
-            i = i+1
-        }
-        
-    }
+    
     
     
     func addButtonTap() {
@@ -229,6 +217,31 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
                 self.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
             } 
         }).disposed(by: disposeBag)
+        
+        tableView.rx.itemMoved.subscribe(onNext: { (movePath) in
+            
+            let (sourceIndexPath, destinationIndexPath) = movePath
+            if(sourceIndexPath.section == destinationIndexPath.section) {
+                if sourceIndexPath.section == 0 {
+                    var uncheckedGroup = self.viewModel.sections.value
+                    let itemToMove = uncheckedGroup[0].items[sourceIndexPath.row]
+                    uncheckedGroup[0].items.remove(at: sourceIndexPath.row)
+                    uncheckedGroup[0].items.insert(itemToMove, at: destinationIndexPath.row)
+                    self.viewModel.sections.accept(uncheckedGroup)
+                } else {
+                    var checkedGroup = self.viewModel.sections.value
+                    let itemToMove = checkedGroup[1].items[sourceIndexPath.row]
+                    checkedGroup[1].items.remove(at: sourceIndexPath.row)
+                    checkedGroup[1].items.insert(itemToMove, at: destinationIndexPath.row)
+                    self.viewModel.sections.accept(checkedGroup)
+                }
+            } else  {
+                    let task = self.viewModel.sections.value[sourceIndexPath.section].items[sourceIndexPath.row]
+                    self.viewModel.services.tasks.editTask(task, editItems: [["text":""],["text":task.text]], for: self.viewModel.services.user.user.getUserUUID())
+                self.tableView.reloadData()
+            }
+        }).disposed(by: viewModel.disposeBag)
+        
     }
     
     
@@ -276,7 +289,6 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
             
             tableView.rx.itemDeleted.subscribe().disposed(by: self.viewModel.disposeBag)
             
-            
         })
         
         return [deleteAction,editAction]
@@ -285,6 +297,35 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        if(sourceIndexPath.section == destinationIndexPath.section) {
+            if sourceIndexPath.section == 0 {
+                var uncheckedGroup = viewModel.sections.value
+                let itemToMove = uncheckedGroup[0].items[sourceIndexPath.row]
+                uncheckedGroup[0].items.remove(at: sourceIndexPath.row)
+                uncheckedGroup[0].items.insert(itemToMove, at: destinationIndexPath.row)
+                viewModel.sections.accept(uncheckedGroup)
+            } else {
+                var checkedGroup = viewModel.sections.value
+                let itemToMove = checkedGroup[1].items[sourceIndexPath.row]
+                checkedGroup[1].items.remove(at: sourceIndexPath.row)
+                checkedGroup[1].items.insert(itemToMove, at: destinationIndexPath.row)
+                viewModel.sections.accept(checkedGroup)
+            }
+        } else {
+            tableView.reloadData()
+        }
+    }
+    
+//    public var itemMoved: ControlEvent<ItemMovedEvent> {
+//        let source: Observable<ItemMovedEvent> = self.dataSource.methodInvoked(#selector(UITableViewDataSource.tableView(_:moveRowAt:to:)))
+//            .map { a in
+//                return (try castOrThrow(IndexPath.self, a[1]), try castOrThrow(IndexPath.self, a[2]))
+//        }
+//
+//        return ControlEvent(events: source)
+//    }
     
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 40

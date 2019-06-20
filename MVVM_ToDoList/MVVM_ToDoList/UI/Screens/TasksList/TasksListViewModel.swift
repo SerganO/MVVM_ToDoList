@@ -16,7 +16,7 @@ class TasksListViewModel: ViewModel {
     
     let sections: BehaviorRelay<[Section]>
     
-    var isFirst = true
+    var isNeedMove = false
     
     override init(services: Services) {
         
@@ -26,6 +26,11 @@ class TasksListViewModel: ViewModel {
         
         services.tasks.tasks(for: services.user.user.getUserUUID()).bind(to: sections).disposed(by: disposeBag)
         
+//        services.tasks.tasks(for: services.user.user.getUserUUID()).subscribe{ (event) in
+//                if event.element != nil {
+//                    self.updateId()
+//                }
+//            }.disposed(by: disposeBag)
         
         services.tasks.tasks(for: services.user.user.getUserUUID()).subscribe { (tasks) in
             
@@ -37,7 +42,15 @@ class TasksListViewModel: ViewModel {
     }
     
     
-    
+    func updateId() {
+        for section in sections.value {
+            var i = 0
+            for task in section.items {
+                services.tasks.editTask(task, editItems: [["orderID":i ]], for: services.user.user.getUserUUID())
+                i = i + 1
+            }
+        }
+    }
     
     static func configureTaskCell(_ task:TaskModel, cell: TaskCell) {
         cell.taskTextLabel.text = task.text
@@ -68,6 +81,12 @@ class TasksListViewModel: ViewModel {
     
     func selectCell(_ cell: TaskCell, indexPath: IndexPath) {
         let task = sections.value[indexPath.section].items[indexPath.row]
+        task.orderID = -1
+        var value = sections.value
+        value[indexPath.section].items.remove(at: indexPath.row)
+        let sect = indexPath.section == 0 ? 1 : 0
+        value[sect].items.insert(task, at: 0)
+        sections.accept(value)
         task.completed = !task.completed
         task.createDate = Date()
         TasksListViewModel.configureTaskCell(task, cell: cell)
@@ -76,6 +95,7 @@ class TasksListViewModel: ViewModel {
         formatter.timeStyle = .medium
         formatter.dateFormat = "dd-MM-yyyy HH-mm-ss"
         services.tasks.editTask(task, editItems: [["completed":task.completed ? 1 : 0],["createDate":formatter.string(from: Date())]], for: services.user.user.getUserUUID())
+        updateId()
     }
     
     

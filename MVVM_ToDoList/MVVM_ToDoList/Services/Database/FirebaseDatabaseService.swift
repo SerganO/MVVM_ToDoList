@@ -72,9 +72,9 @@ class FirebaseDatabaseService: DatabaseService {
                     if let snapshot = child as? DataSnapshot,
                         let task = TaskModel(dictionary: snapshot.value as? [String: Any] ?? [:]) {
                         if task.completed {
-                            newTasks[1].items.insert(task, at: 0)
+                            newTasks[1].items.append(task)
                         } else {
-                            newTasks[0].items.insert(task, at: 0)
+                            newTasks[0].items.append(task)
                         }
                     }
                     observer.onNext(newTasks)
