@@ -316,14 +316,6 @@ class TasksListViewController: ViewController<TasksListViewModel>, UITableViewDe
         }
     }
     
-//    public var itemMoved: ControlEvent<ItemMovedEvent> {
-//        let source: Observable<ItemMovedEvent> = self.dataSource.methodInvoked(#selector(UITableViewDataSource.tableView(_:moveRowAt:to:)))
-//            .map { a in
-//                return (try castOrThrow(IndexPath.self, a[1]), try castOrThrow(IndexPath.self, a[2]))
-//        }
-//
-//        return ControlEvent(events: source)
-//    }
     
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 40

@@ -50,8 +50,6 @@ class FirebaseDatabaseService: DatabaseService {
                     let uuid = UUID().uuidString
                     self.MainRef.child("Identifier").child(type.getTypeString()).child(userID).setValue(uuid)
                     self.MainRef.child("users").child(uuid).child("sync").setValue(false)
-//                    let idRef = self.MainRef.child("users").child(uuid).child("IDs")
-//                    idRef.child(type.getTypeString()).setValue(userID)
                     
                     observer.onNext(uuid)
                     completion(true)

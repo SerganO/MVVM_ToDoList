@@ -9,9 +9,7 @@
 import UIKit
 
 enum Scene {
-    //case task
     case addTask(AddTaskViewModel)
-    //case editTask
     case login(LoginViewModel)
     case splash(SplashViewModel)
     case navigation(NavigationViewModel)
